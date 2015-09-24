@@ -8,17 +8,33 @@
     <% if @posts.present? %>
 		  <% @posts.each do |post| %>
         <tr>
-          <td><%= post.user_id %></td>
           <td><%= post.title %></td>
-          <td><%= post.description %></td>
-          <td><%= post.images %></td>
-          <td><%= post.date_modified %></td>
-          <td><%= post.post_status %></td>
-          <td><%= post.having_tag_id %></td>
-          <td><%= link_to 'Show', post %></td>
-          <td><%= link_to 'Edit', edit_post_path(post) %></td>
-          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
+        <tr>
+          <td>Posted by <%= User.find(post.user_id).username %></td>
+          <td>at <%= post.date_modified %></td>
+        </tr>
+        <tr>
+          <td><%= post.description %></td>
+        </tr>
+        <tr>
+          <td>Tag: <%= Tag.find(post.having_tag_id).title %></td>
+        </tr>
+        <tr>
+          <td>Want: <%= Tag.find(post.want_tag_id).title %></td>
+        </tr>
+        <tr>
+          <td>
+            <table>
+              <tr>
+                <td><%= link_to 'Show', post %></td>
+                <td><%= link_to 'Edit', edit_post_path(post) %></td>
+                <td><%= link_to 'Remove', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        
       <% end %>
 		<% else %>
 		  <p>There are no posts containing the term(s) .</p>
