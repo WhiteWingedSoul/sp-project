@@ -8,6 +8,7 @@ class CreatePosts < ActiveRecord::Migration
       t.datetime :date_modified
       t.boolean :post_status
       t.integer :having_tag_id
+      t.integer :want_tag_id
 
       t.timestamps null: false
     end

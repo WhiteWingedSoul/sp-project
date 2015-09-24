@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
+    <%= f.collection_select :user_id, User.all, :id, :username %>
   </div>
   <div class="field">
     <%= f.label :title %><br>
@@ -37,7 +37,11 @@
   </div>
   <div class="field">
     <%= f.label :having_tag_id %><br>
-    <%= f.text_field :having_tag_id %>
+    <%= f.collection_select :having_tag_id, Tag.all, :id, :title %>
+  </div>
+  <div class="field">
+    <%= f.label :want_tag_id %><br>
+    <%= f.collection_select :want_tag_id, Tag.all, :id, :title %>
   </div>
   <div class="actions">
     <%= f.submit %>
