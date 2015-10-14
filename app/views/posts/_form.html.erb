@@ -12,28 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.collection_select :user_id, User.all, :id, :username %>
-  </div>
-  <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.cktext_area :description %>
   </div>
   <div class="field">
-    <%= f.label :images %><br>
-    <%= f.text_field :images %>
-  </div>
-  <div class="field">
-    <%= f.label :date_modified %><br>
-    <%= f.date_select :date_modified %>
-  </div>
-  <div class="field">
-    <%= f.label :post_status %><br>
-    <%= f.check_box :post_status %>
+    Upload your sample images (Ctrl or Shift select to upload multiple images)<br>
+    <%= f.file_field :imgs, multiple: true %>
   </div>
   <div class="field">
     <%= f.label :having_tag_id %><br>

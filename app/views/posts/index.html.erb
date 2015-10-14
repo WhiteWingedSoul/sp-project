@@ -11,17 +11,7 @@
           <td><%= post.title %></td>
         </tr>
         <tr>
-          <td>Posted by <%= User.find(post.user_id).username %></td>
-          <td>at <%= post.date_modified %></td>
-        </tr>
-        <tr>
-          <td><%= post.description %></td>
-        </tr>
-        <tr>
-          <td>Tag: <%= Tag.find(post.having_tag_id).title %></td>
-        </tr>
-        <tr>
-          <td>Want: <%= Tag.find(post.want_tag_id).title %></td>
+          <td><%= raw post.description %></td>
         </tr>
         <tr>
           <td>

@@ -1,10 +1,7 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>User:</strong>
-  <%= @post.user_id %>
-</p>
-
+<% if flash[:success] %>
+  <div class="alert alert-success"><%= flash[:success] %></div>
+<% end %>
 <p>
   <strong>Title:</strong>
   <%= @post.title %>
@@ -12,27 +9,19 @@
 
 <p>
   <strong>Description:</strong>
-  <%= @post.description %>
+  <%= raw @post.description %>
 </p>
 
 <p>
   <strong>Images:</strong>
-  <%= @post.images %>
+  <% @post.imgs.each do |img| %>
+  <%= img.url %><br>
+  <% end %>
 </p>
 
 <p>
   <strong>Post status:</strong>
   <%= @post.post_status %>
-</p>
-
-<p>
-  <strong>Having tag:</strong>
-  <%= @post.having_tag_id %>
-</p>
-
-<p>
-  <strong>Want tag:</strong>
-  <%= @post.want_tag_id %>
 </p>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
