@@ -30,7 +30,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = User.find_by(id: 1).posts.create(post_params)
+    @post = current_user.posts.create(post_params)
     
       if @post.save
         # format.html { redirect_to @post, notice: 'Post was successfully created.' }

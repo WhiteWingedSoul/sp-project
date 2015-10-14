@@ -32,6 +32,6 @@
     <%= f.collection_select :want_tag_id, Tag.all, :id, :title %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Create new trade', :class => 'btn btn-primary' %>
   </div>
 <% end %>
