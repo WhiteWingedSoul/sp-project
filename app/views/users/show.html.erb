@@ -1,54 +1,11 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Firstname:</strong>
-  <%= @user.firstname %>
-</p>
-
-<p>
-  <strong>Lastname:</strong>
-  <%= @user.lastname %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= @user.gender %>
-</p>
-
-<p>
-  <strong>Avatar:</strong>
-  <%= @user.avatar %>
-</p>
-
-<p>
-  <strong>Last login:</strong>
-  <%= @user.last_login %>
-</p>
-
-<p>
-  <strong>Birthday:</strong>
-  <%= @user.birthday %>
-</p>
-
-<p>
-  <strong>Tel:</strong>
-  <%= @user.tel %>
-</p>
-
-<p>
-  <strong>Skype:</strong>
-  <%= @user.skype %>
-</p>
-
-<p>
-  <strong>Facebook:</strong>
-  <%= @user.facebook %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% provide(:title, @user.firstname + " " + @user.lastname ) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+          <%= gravatar_for @user %>
+          <%= @user.firstname + " " + @user.lastname %>
+      </h1>
+    </section>
+  </aside>
+</div>
