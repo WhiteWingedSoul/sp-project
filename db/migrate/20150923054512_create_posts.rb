@@ -5,7 +5,6 @@ class CreatePosts < ActiveRecord::Migration
       t.string :title
       t.string :description
       t.string :images
-      t.datetime :date_modified
       t.boolean :post_status
       t.integer :having_tag_id
       t.integer :want_tag_id

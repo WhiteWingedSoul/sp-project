@@ -11,14 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923055043) do
+ActiveRecord::Schema.define(version: 20151014045738) do
 
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "title"
     t.string   "description"
     t.string   "images"
-    t.datetime "date_modified"
     t.boolean  "post_status"
     t.integer  "having_tag_id"
     t.integer  "want_tag_id"
@@ -33,11 +32,9 @@ ActiveRecord::Schema.define(version: 20150923055043) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "username"
-    t.string   "password"
-    t.string   "email"
     t.string   "firstname"
     t.string   "lastname"
+    t.string   "email"
     t.string   "gender"
     t.string   "avatar"
     t.datetime "last_login"
@@ -45,9 +42,9 @@ ActiveRecord::Schema.define(version: 20150923055043) do
     t.string   "tel"
     t.string   "skype"
     t.string   "facebook"
-    t.date     "joindate"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "password_digest"
   end
 
 end

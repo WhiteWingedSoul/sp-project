@@ -1,16 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
-
-<p>
   <strong>Email:</strong>
   <%= @user.email %>
 </p>
@@ -58,11 +48,6 @@
 <p>
   <strong>Facebook:</strong>
   <%= @user.facebook %>
-</p>
-
-<p>
-  <strong>Joindate:</strong>
-  <%= @user.joindate %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
