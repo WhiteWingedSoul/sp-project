@@ -21,6 +21,8 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    @tag_have = []
+    @tag_want = []
   end
 
   # GET /posts/1/edit
@@ -60,10 +62,14 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    @post.destroy
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-      format.json { head :no_content }
+    # @post.destroy
+    # respond_to do |format|
+    #   format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
+    if @post.destroy
+      flash[:success] = "Post deleted successfully"
+      redirect_to root_path
     end
   end
 
