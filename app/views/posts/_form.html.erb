@@ -25,11 +25,11 @@
   </div>
   <div class="field">
     Your property's kind of object (described in tags)<br>
-    <%= f.select :tag_have, options_for_select(["Cell", "Work", "Office", "Home", "Other"]), {prompt: "Select One"}, {class:  'tags form-control', multiple: "multiple"} %>
+    <%= f.select :tag_have, options_for_select(@all_tag.map{|p| [p.title, p.id]}), {}, {class:  'tags form-control', multiple: "multiple"} %>
   </div>
   <div class="field">
     Your expectation's kind of object (described in tags)<br>
-    <%= f.select :tag_want, options_for_select(["Cell", "Work", "Office", "Home", "Other"]), {prompt: "Select One"}, {class:  'tags form-control', multiple: "multiple"} %>
+    <%= f.select :tag_want, options_for_select(@all_tag.map{|p| [p.title, p.id]}), {}, {class:  'tags form-control', multiple: "multiple"} %>
   </div>
   <div class="actions"><br>
     <%= f.submit 'Create new trade', :class => 'btn btn-primary' %>

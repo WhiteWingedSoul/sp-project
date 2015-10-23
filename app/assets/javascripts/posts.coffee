@@ -3,5 +3,5 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
   $('.tags').select2({
-      theme: "bootstrap"
+      placeholder: "Hãy nhập tag loại đồ dùng của bạn"
       })
