@@ -21,8 +21,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
-    @tag_have = []
-    @tag_want = []
+    @all_tag = Tag.all
   end
 
   # GET /posts/1/edit
