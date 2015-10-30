@@ -25,11 +25,11 @@
   </div>
   <div class="field">
     <%= f.label :having_tag_id %><br>
-    <%= f.collection_select :having_tag_id, Tag.all, :id, :title %>
+    <%= f.collection_select :having_tag, Tag.all, :id, :title %>
   </div>
   <div class="field">
     <%= f.label :want_tag_id %><br>
-    <%= f.collection_select :want_tag_id, Tag.all, :id, :title %>
+    <%= f.collection_select :want_tag, Tag.all, :id, :title %>
   </div>
   <div class="actions">
     <%= f.submit 'Create new trade', :class => 'btn btn-primary' %>

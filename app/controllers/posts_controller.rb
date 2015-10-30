@@ -23,6 +23,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    assign_user(@post)
   end
 
   # GET /posts/1/edit
@@ -81,6 +82,10 @@ class PostsController < ApplicationController
     end
     
     def correct_user
+    end
+    
+    def assign_user(post)
+      post.user_id = current_user.id
     end
     
     def logged_in_user
