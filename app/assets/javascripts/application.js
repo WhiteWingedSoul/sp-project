@@ -12,7 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.turbolinks
 //= require bootstrap
 //= require turbolinks
+//= require select2
+//= require select2_locale_pt-BR
 //= require ckeditor/init
 //= require_tree .

@@ -19,12 +19,30 @@ ActiveRecord::Schema.define(version: 20151022155057) do
     t.string   "description"
     t.string   "images"
     t.boolean  "post_status"
-    t.integer  "having_tag_id"
-    t.integer  "want_tag_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.text     "imgs"
   end
+
+  create_table "tag_haves", force: :cascade do |t|
+    t.integer  "tag_id"
+    t.integer  "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tag_haves", ["post_id"], name: "index_tag_haves_on_post_id"
+  add_index "tag_haves", ["tag_id"], name: "index_tag_haves_on_tag_id"
+
+  create_table "tag_wants", force: :cascade do |t|
+    t.integer  "tag_id"
+    t.integer  "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tag_wants", ["post_id"], name: "index_tag_wants_on_post_id"
+  add_index "tag_wants", ["tag_id"], name: "index_tag_wants_on_tag_id"
 
   create_table "tags", force: :cascade do |t|
     t.string   "title"

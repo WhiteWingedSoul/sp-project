@@ -7,10 +7,10 @@
 		<h1>GiaodichVN</h1>
 		<p>
 			<%= form_tag(posts_path, :method => "get", id: "search-form") do %>
-			<%= select_tag :search_type, options_for_select({"Đang có" => "want_tag_id", "Đang cần" => "having_tag_id"})%>
+			<%= select_tag :search_type, options_for_select({"Đang có" => "tag_haves", "Đang cần" => "tag_wants"})%>
 			<%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :title)%>
 			<%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
-			<%= submit_tag "Search" %>
+			<%= submit_tag "Search", :class => 'btn btn-primary' %>
 			<% end %>
 		</p>
 		
