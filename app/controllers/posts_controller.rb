@@ -2,6 +2,8 @@ require 'carrierwave/orm/activerecord'
 
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update]
 
   # GET /posts
   # GET /posts.json
@@ -77,4 +79,16 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:user_id, :title, :description, :images, :date_modified, :post_status, :having_tag_id, :want_tag_id, {imgs: []})
     end
+    
+    def correct_user
+    end
+    
+    def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in to access this page"
+        redirect_to login_path
+      end
+    end
+  
 end
