@@ -17,6 +17,5 @@
 //= require turbolinks
 //= require select2
 //= require select2_locale_pt-BR
-//= require bootstrap-sprockets
 //= require ckeditor/init
 //= require_tree .

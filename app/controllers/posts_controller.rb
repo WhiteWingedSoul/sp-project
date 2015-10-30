@@ -32,10 +32,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = current_user.posts.create(post_params)
-    
       if @post.save
-        # format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        # format.json { render :show, status: :created, location: @post }
         flash[:success] = "Post created successfully!"
         redirect_to root_path
       else
@@ -61,11 +58,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    # @post.destroy
-    # respond_to do |format|
-    #   format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-    #   format.json { head :no_content }
-    # end
+
     if @post.destroy
       flash[:success] = "Post deleted successfully"
       redirect_to root_path
@@ -80,6 +73,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:user_id, :title, :description, :images, :date_modified, :post_status, :having_tag_id, :want_tag_id, {imgs: []})
+      params.require(:post).permit(:user_id, :title, :description, :date_modified, :post_status, {imgs: []})
     end
 end
