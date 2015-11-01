@@ -17,12 +17,28 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post_attachments = @post.post_attachments.all
+    @current_tag_have = []
+    @current_tag_want = []
+    
+    all_tag_have = @post.tag_have.all
+    all_tag_have.each do |a|
+      tbi = Tag.find(a)
+      @current_tag_have << tbi
+    end
+    
+    all_tag_want = @post.tag_want.all
+    all_tag_want.each do |a|
+      tbi = Tag.find(a)
+      @current_tag_want << tbi
+    end
   end
 
   # GET /posts/new
   def new
     @post = Post.new
     @post_attachment = @post.post_attachments.build
+    @tag_have = @post.tag_have.build
+    @tag_want = @post.tag_want.build
     @all_tag = Tag.all
   end
 
@@ -36,9 +52,22 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.create(post_params)
       if @post.save
+        params[:post]['tag_have'].each do |tag|
+          if tag != ''
+            @tag_have = @post.tag_have.create(:tag => tag.to_i, :post => @post)
+          end
+        end
+        
+        params[:post]['tag_want'].each do |tag|
+          if tag != ''
+            @tag_want = @post.tag_want.create(:tag => tag.to_i, :post => @post)
+          end
+        end
+        
         params[:post_attachments]['avatar'].each do |a|
           @post_attachment = @post.post_attachments.create!(:avatar => a)
         end
+        
         flash[:success] = "Post created successfully!"
         redirect_to root_path
       else

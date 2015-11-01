@@ -22,6 +22,24 @@
 </p>
 
 <p>
+  <strong>Tag đồ vật muốn đổi đi:</strong>
+  <ul>
+    <% @current_tag_have.each do |tag| %>
+    <li><%= tag.title %></li>
+    <% end %>
+  </ul>
+</p>
+
+<p>
+  <strong>Tag đồ vật muốn nhận lại:</strong>
+  <ul>
+    <% @current_tag_want.each do |tag| %>
+    <li><%= tag.title %></li>
+    <% end %>
+  </ul>
+</p>
+
+<p>
   <strong>Post status:</strong>
   <%= @post.post_status %>
 </p>
