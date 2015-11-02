@@ -13,26 +13,26 @@
 
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_field :title, :class => 'form-control' %>
+    <%= f.text_field :title, :class => 'form-control', :required => true %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.cktext_area :description %>
+    <%= f.cktext_area :description, :required => true %>
   </div>
   <!--For uploading images-->
   <%= f.fields_for :post_attachments do |p| %>
      <div class="field">
        Tải hình ảnh đồ vật trao đổi<br>
-       <%= p.file_field :avatar, :multiple => true, name: "post_attachments[avatar][]" %>
+       <%= p.file_field :avatar, :multiple => true, name: "post_attachments[avatar][]", :required => true %>
      </div>
   <% end %>
   <div class="field">
     Your property's kind of object (described in tags)<br>
-    <%= f.select :tag_have, options_for_select(@all_tag.map{|p| [p.title, p.id]}), {}, {class:  'tags form-control', multiple: "multiple"} %>
+    <%= f.select :tag_have, options_for_select(@all_tag.map{|p| [p.title, p.id]}), {}, {class:  'tags form-control', multiple: "multiple", required: true} %>
   </div>
   <div class="field">
     Your expectation's kind of object (described in tags)<br>
-    <%= f.select :tag_want, options_for_select(@all_tag.map{|p| [p.title, p.id]}), {}, {class:  'tags form-control', multiple: "multiple"} %>
+    <%= f.select :tag_want, options_for_select(@all_tag.map{|p| [p.title, p.id]}), {}, {class:  'tags form-control', multiple: "multiple", required: true} %>
   </div>
   <div class="actions"><br>
     <%= f.submit 'Create new trade', :class => 'btn btn-primary' %>
