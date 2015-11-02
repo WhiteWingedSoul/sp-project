@@ -3,6 +3,13 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
+ 
+ 
+
+.carousel-control {
+  padding-top:10%;
+  width:5%;
+}
 
 body,
 html {
@@ -10,15 +17,8 @@ html {
     height: 100%;
 }
 
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 700;
+body{
+    padding-top: 0px;
 }
 
 .topnav {
@@ -163,4 +163,18 @@ h6 {
 
 p.copyright {
     margin: 15px 0 0;
+}
+
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+    color:#0f60d9;
 }
