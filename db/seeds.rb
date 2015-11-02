@@ -6,18 +6,17 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create!(firstname:  "Example",
-             lastname: "User",
-             email: "example@railstutorial.org",
-             password:              "foobar",
-             password_confirmation: "foobar")
-
-99.times do |n|
-  firstname  = Faker::Name.name
-  email = "example-#{n+1}@railstutorial.org"
-  password = "password"
-  User.create!(firstname:  firstname,
-               email: email,
-               password:              password,
-               password_confirmation: password)
-end
+Tag.create("title"=>"Đồ gia dụng")
+Tag.create("title"=>"Văn phòng phẩm")
+Tag.create("title"=>"Bàn")
+Tag.create("title"=>"Ghế")
+Tag.create("title"=>"Trang sức")
+Tag.create("title"=>"Tủ")
+Tag.create("title"=>"Quần áo")
+Tag.create("title"=>"Điện thoại")
+Tag.create("title"=>"Máy giặt")
+Tag.create("title"=>"Dụng cụ bếp")
+Tag.create("title"=>"Laptop")
+Tag.create("title"=>"Linh kiện điện tử")
+Tag.create("title"=>"Đĩa CD")
+Tag.create("title"=>"Xe máy")

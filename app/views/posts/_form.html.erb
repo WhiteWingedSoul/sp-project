@@ -1,4 +1,4 @@
-<%= form_for(@post) do |f| %>
+<%= form_for(@post, :html => { :multipart => true }) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -13,25 +13,28 @@
 
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, :class => 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
     <%= f.cktext_area :description %>
   </div>
+  <!--For uploading images-->
+  <%= f.fields_for :post_attachments do |p| %>
+     <div class="field">
+       Tải hình ảnh đồ vật trao đổi<br>
+       <%= p.file_field :avatar, :multiple => true, name: "post_attachments[avatar][]" %>
+     </div>
+  <% end %>
   <div class="field">
-    Upload your sample images (Ctrl or Shift select to upload multiple images)<br>
-    <%= f.file_field :imgs, multiple: true %>
+    Your property's kind of object (described in tags)<br>
+    <%= f.select :tag_have, options_for_select(@all_tag.map{|p| [p.title, p.id]}), {}, {class:  'tags form-control', multiple: "multiple"} %>
   </div>
   <div class="field">
-    <%= f.label :having_tag_id %><br>
-    <%= f.collection_select :having_tag, Tag.all, :id, :title %>
+    Your expectation's kind of object (described in tags)<br>
+    <%= f.select :tag_want, options_for_select(@all_tag.map{|p| [p.title, p.id]}), {}, {class:  'tags form-control', multiple: "multiple"} %>
   </div>
-  <div class="field">
-    <%= f.label :want_tag_id %><br>
-    <%= f.collection_select :want_tag, Tag.all, :id, :title %>
-  </div>
-  <div class="actions">
+  <div class="actions"><br>
     <%= f.submit 'Create new trade', :class => 'btn btn-primary' %>
   </div>
 <% end %>

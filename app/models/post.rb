@@ -1,11 +1,11 @@
 class Post < ActiveRecord::Base
   belongs_to:user
-  belongs_to:having_tag, :class_name => 'Tag', :foreign_key => 'having_tag_id'
-  belongs_to:want_tag, :class_name => 'Tag', :foreign_key => 'want_tag_id'
-  mount_uploaders :imgs, PostImageUploader
+  has_many :post_attachments
+  accepts_nested_attributes_for :post_attachments
+  has_many :tag_have
+  has_many :tag_want
   
   def self.search(tag, title, type)
     where('title LIKE ? and '+"#{type}"+' = ?', "%#{title}%", tag) 
   end
-  
 end

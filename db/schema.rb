@@ -11,20 +11,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022155057) do
+ActiveRecord::Schema.define(version: 20151031032900) do
+
+  create_table "post_attachments", force: :cascade do |t|
+    t.integer  "post_id"
+    t.string   "avatar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "post_attachments", ["post_id"], name: "index_post_attachments_on_post_id"
 
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "title"
     t.string   "description"
-    t.string   "images"
     t.boolean  "post_status"
-    t.integer  "having_tag_id"
-    t.integer  "want_tag_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.text     "imgs"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
+
+  create_table "tag_haves", force: :cascade do |t|
+    t.integer  "tag"
+    t.integer  "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tag_haves", ["post_id"], name: "index_tag_haves_on_post_id"
+
+  create_table "tag_wants", force: :cascade do |t|
+    t.integer  "tag"
+    t.integer  "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tag_wants", ["post_id"], name: "index_tag_wants_on_post_id"
 
   create_table "tags", force: :cascade do |t|
     t.string   "title"
