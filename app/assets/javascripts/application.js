@@ -19,3 +19,26 @@
 //= require select2_locale_pt-BR
 //= require ckeditor/init
 //= require_tree .
+$(document).ready(function() {
+	$('#myCarousel').carousel({
+	interval: 5000
+	})
+    
+    $('#myCarousel').on('slid.bs.carousel', function() {
+    	//alert("slid");
+	});
+    
+    
+});
+$(document).ready(function(){
+	$('.stop-propagation').on('click', function (e) {
+	    e.stopPropagation();
+	});
+});
+$(document).ready(function(){
+    $('.dropdown').hover(function() {
+        $(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideDown();
+    }, function() {
+        $(this).find('.dropdown-menu').first().stop(true, true).delay(100).slideUp()
+    });
+});

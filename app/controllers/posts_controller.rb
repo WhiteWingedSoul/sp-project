@@ -2,6 +2,8 @@ require 'carrierwave/orm/activerecord'
 
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update]
 
   # GET /posts
   # GET /posts.json
@@ -19,13 +21,13 @@ class PostsController < ApplicationController
     @post_attachments = @post.post_attachments.all
     @current_tag_have = []
     @current_tag_want = []
-    
+
     all_tag_have = @post.tag_have.all
     all_tag_have.each do |a|
       tbi = Tag.find(a)
       @current_tag_have << tbi
     end
-    
+
     all_tag_want = @post.tag_want.all
     all_tag_want.each do |a|
       tbi = Tag.find(a)
@@ -57,17 +59,17 @@ class PostsController < ApplicationController
             @tag_have = @post.tag_have.create(:tag => tag.to_i, :post => @post)
           end
         end
-        
+
         params[:post]['tag_want'].each do |tag|
           if tag != ''
             @tag_want = @post.tag_want.create(:tag => tag.to_i, :post => @post)
           end
         end
-        
+
         params[:post_attachments]['avatar'].each do |a|
           @post_attachment = @post.post_attachments.create!(:avatar => a)
         end
-        
+
         flash[:success] = "Post created successfully!"
         redirect_to root_path
       else
@@ -110,4 +112,20 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:user_id, :title, :description, :date_modified, :post_status, post_attachments_attributes: [:id, :post_id, :avatar])
     end
+
+    def correct_user
+    end
+
+    def assign_user(post)
+      post.user_id = current_user.id
+    end
+
+    def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in to access this page"
+        redirect_to login_path
+      end
+    end
+
 end

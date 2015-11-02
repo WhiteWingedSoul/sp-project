@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = "Registration successful!"
-      redirect_to root_path
+      redirect_to edit_user_url(@user)
     else
       render 'new'
     end
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
+    if @user.update_attributes(profile_params)
       flash[:success] = "Profile updated !"
       redirect_to @user
     else
@@ -53,6 +53,10 @@ class UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:firstname, :lastname, :email, :password, :password_confirmation)
+    end
+    
+    def profile_params
+      params.require(:user).permit(:firstname, :lastname, :birthday, :gender, :tel, :skype, :facebook, :email, :password, :password_confirmation)
     end
     
     def logged_in_user

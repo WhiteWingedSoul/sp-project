@@ -1,19 +1,205 @@
-<% provide(:title, "Home")%>
-<html>
-	<head>
-		<title><%= yield(:title)%></title>
-	</head>
-	<body>
-		<h1>GiaodichVN</h1>
-		<p>
-			<%= form_tag(posts_path, :method => "get", id: "search-form") do %>
-			<%= select_tag :search_type, options_for_select({"Đang có" => "tag_haves", "Đang cần" => "tag_wants"})%>
-			<%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :title)%>
-			<%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
-			<%= submit_tag "Search", :class => 'btn btn-primary' %>
-			<% end %>
-		</p>
-		
-		
-	</body>
-</html>
+ <%= stylesheet_link_tag 'landing-page', media: 'all', 'data-turbolinks-track' => true %>
+
+
+
+    <a name="about"></a>
+    <div class="intro-header">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+
+
+                    <div class="intro-message">
+                        <h1>GiaodichVN</h1>
+                        <h3>Hệ thống trao đổi đồ dùng lớn nhất Việt Nam</h3>
+                        <hr class="intro-divider">
+
+                        <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+                        <div class="input-group" id="adv-search">
+                            <%= text_field_tag :search, params[:search], placeholder: "Bạn đang muốn tìm món đồ gì......?", class:"form-control" %>
+
+                            <div class="input-group-btn">
+                                <div class="btn-group" role="group">
+                                    <div class="dropdown dropdown-lg">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                        <div class="dropdown-menu dropdown-menu-right stop-propagation" role="menu">
+
+                                                  <div class="form-group stop-propagation">
+                                                    <label for="contain">Loại</label>
+                                                    <%= select_tag :search_type, options_for_select({"Đang có" => "want_tag_id", "Đang cần" => "having_tag_id"}), class:"form-control"%>
+                                                  </div>
+                                                  <br>
+                                                  <div class="form-group stop-propagation">
+                                                    <label for="contain">Tag</label>
+                                                    <%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :title), class:"form-control"%>
+                                                  </div>
+                                                  <br>
+                                        </div>
+                                    </div>
+                                    <%= button_tag(type: 'submit',class:"btn btn-primary") do %>
+                                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <% end %>
+
+                    </div>
+                </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.intro-header -->
+
+    <!-- Page Content -->
+
+	<a  name="services"></a>
+    <div class="content-section-a">
+
+        <div class="container">
+            <div class="col-md-12">
+                <h1>Bootstrap 3 Thumbnail Slider</h1>
+
+                    <div id="myCarousel" class="carousel slide">
+
+                        <!-- Carousel items -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <div class="row">
+                                    <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
+                                    </div>
+                                    <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
+                                    </div>
+                                    <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
+                                    </div>
+                                    <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
+                                    </div>
+                                </div>
+                                <!--/row-->
+                            </div>
+                            <!--/item-->
+                            <div class="item">
+                                <div class="row">
+                                    <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
+                                    </div>
+                                    <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
+                                    </div>
+                                    <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
+                                    </div>
+                                    <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
+                                    </div>
+                                </div>
+                                <!--/row-->
+                            </div>
+                            <!--/item-->
+                            <div class="item">
+                                <div class="row">
+                                    <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
+                                    </div>
+                                    <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
+                                    </div>
+                                    <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
+                                    </div>
+                                    <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
+                                    </div>
+                                </div>
+                                <!--/row-->
+                            </div>
+                            <!--/item-->
+                        </div>
+                        <!--/carousel-inner--> <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+                    </div>
+                    <!--/myCarousel-->
+
+                <!--/well-->
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+    <div class="content-section-b">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">3D Device Mockups<br>by PSDCovers</h2>
+                    <p class="lead">Turn your 2D designs into high quality, 3D product shots in seconds using free Photoshop actions by <a target="_blank" href="http://www.psdcovers.com/">PSDCovers</a>! Visit their website to download some of their awesome, free photoshop actions!</p>
+                </div>
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                    <img class="img-responsive" src="<%= asset_path('dog.png') %>" alt="">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-b -->
+
+    <div class="content-section-a">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Google Web Fonts and<br>Font Awesome Icons</h2>
+                    <p class="lead">This template features the 'Lato' font, part of the <a target="_blank" href="http://www.google.com/fonts">Google Web Font library</a>, as well as <a target="_blank" href="http://fontawesome.io">icons from Font Awesome</a>.</p>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive" src="<%=  asset_path('phones.png') %>" alt="">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+	<a  name="contact"></a>
+    <div class="banner">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2>Connect to Start Bootstrap:</h2>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="list-inline banner-social-buttons">
+                        <li>
+                            <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.banner -->
+
+    <!-- Footer -->
