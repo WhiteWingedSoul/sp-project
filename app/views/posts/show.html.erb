@@ -15,9 +15,27 @@
 <p>
   <strong>Images:</strong>
   <ul>
-  <% @post.imgs.each do |img| %>
-    <li><%= image_tag URI.join(root_url, img.url.gsub('%5B%22', '').gsub('%22%5D', '')) %></li>
+  <% @post_attachments.each do |img| %>
+    <li><%= image_tag img.avatar_url %></li>
   <% end %>
+  </ul>
+</p>
+
+<p>
+  <strong>Tag đồ vật muốn đổi đi:</strong>
+  <ul>
+    <% @current_tag_have.each do |tag| %>
+    <li><%= tag.title %></li>
+    <% end %>
+  </ul>
+</p>
+
+<p>
+  <strong>Tag đồ vật muốn nhận lại:</strong>
+  <ul>
+    <% @current_tag_want.each do |tag| %>
+    <li><%= tag.title %></li>
+    <% end %>
   </ul>
 </p>
 

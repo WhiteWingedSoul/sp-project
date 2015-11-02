@@ -1,8 +1,8 @@
-class CreateTagHaves < ActiveRecord::Migration
+class CreatePostAttachments < ActiveRecord::Migration
   def change
-    create_table :tag_haves do |t|
-      t.integer :tag
+    create_table :post_attachments do |t|
       t.references :post, index: true, foreign_key: true
+      t.string :avatar
 
       t.timestamps null: false
     end

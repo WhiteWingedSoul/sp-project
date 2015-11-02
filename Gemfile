@@ -6,6 +6,7 @@ gem 'rails', '4.2.1'
 ruby '2.2.1'
 # Use sqlite3 as the database for Active Record
 # Use SCSS for stylesheets
+gem 'font-awesome-rails'
 gem 'bcrypt', '>=3.1.7'
 gem 'faker',  '>=1.4.2'
 gem 'will_paginate',  '>=3.0.7'
@@ -42,6 +43,7 @@ gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'ckeditor'
 gem 'select2-rails'
 gem 'jquery-turbolinks'
+gem 'mini_magick'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

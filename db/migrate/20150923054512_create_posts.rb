@@ -4,9 +4,7 @@ class CreatePosts < ActiveRecord::Migration
       t.integer :user_id
       t.string :title
       t.string :description
-      t.string :images
       t.boolean :post_status
-
 
       t.timestamps null: false
     end
