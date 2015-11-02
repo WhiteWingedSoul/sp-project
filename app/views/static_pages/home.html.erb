@@ -14,19 +14,6 @@
                         <h1>GiaodichVN</h1>
                         <h3>Hệ thống trao đổi đồ dùng lớn nhất Việt Nam</h3>
                         <hr class="intro-divider">
-                        <div id="imaginary_container"> 
-                        <div class="col-lg-6 col-lg-offset-3">
-                        <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
-                            <div class="input-group stylish-input-group">
-                                <%= text_field_tag :search, params[:search], placeholder: "Bạn đang muốn tìm món đồ gì......?", class:"form-control" %>
-                                <span class="input-group-addon">
-                                    <%= button_tag(type: 'submit') do %>
-                                     <span class="glyphicon glyphicon-search"></span>
-                                    <% end %>
-                                </span>
-                            </div>
-                        <% end %>
-                        </div>
                         
                         <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
                         <div class="input-group" id="adv-search">
@@ -36,21 +23,18 @@
                                 <div class="btn-group" role="group">
                                     <div class="dropdown dropdown-lg">
                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                                        <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                            <%= form_tag(posts_path, :method => "get", id: "search-form", class:"form-horizontal", role:"form") do %>
-                                              <div class="form-group">
-                                                <label for="contain">Loại</label>
-                                                <%= select_tag :search_type, options_for_select({"Đang có" => "want_tag_id", "Đang cần" => "having_tag_id"}), class:"form-control"%>
-                                              </div>
-                                              <br>
-                                              <div class="form-group">
-                                                <label for="contain">Tag</label>
-                                                <%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :title), class:"form-control"%>
-                                              </div>
-                                              <br>
-                                              
-                                              
-                                        <% end %>
+                                        <div class="dropdown-menu dropdown-menu-right stop-propagation" role="menu">
+                                            
+                                                  <div class="form-group stop-propagation">
+                                                    <label for="contain">Loại</label>
+                                                    <%= select_tag :search_type, options_for_select({"Đang có" => "want_tag_id", "Đang cần" => "having_tag_id"}), class:"form-control"%>
+                                                  </div>
+                                                  <br>
+                                                  <div class="form-group stop-propagation">
+                                                    <label for="contain">Tag</label>
+                                                    <%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :title), class:"form-control"%>
+                                                  </div>
+                                                  <br>
                                         </div>
                                     </div>
                                     <%= button_tag(type: 'submit',class:"btn btn-primary") do %>
@@ -61,7 +45,6 @@
                         </div>
                         
                         <% end %>
-                      </div>
                         
                     </div>
                 </div>

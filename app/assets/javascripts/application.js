@@ -27,3 +27,15 @@ $(document).ready(function() {
     
     
 });
+$(document).ready(function(){
+	$('.stop-propagation').on('click', function (e) {
+	    e.stopPropagation();
+	});
+});
+$(document).ready(function(){
+    $('.dropdown').hover(function() {
+        $(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideDown();
+    }, function() {
+        $(this).find('.dropdown-menu').first().stop(true, true).delay(100).slideUp()
+    });
+});
