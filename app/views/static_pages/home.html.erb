@@ -1,6 +1,6 @@
  <%= stylesheet_link_tag 'landing-page', media: 'all', 'data-turbolinks-track' => true %>
 
-
+            
 
     <a name="about"></a>
     <div class="intro-header">
@@ -8,6 +8,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
+                
                 
                     <div class="intro-message">
                         <h1>GiaodichVN</h1>
@@ -26,6 +27,41 @@
                             </div>
                         <% end %>
                         </div>
+                        
+                        <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+                        <div class="input-group" id="adv-search">
+                            <%= text_field_tag :search, params[:search], placeholder: "Bạn đang muốn tìm món đồ gì......?", class:"form-control" %>
+                            
+                            <div class="input-group-btn">
+                                <div class="btn-group" role="group">
+                                    <div class="dropdown dropdown-lg">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                            <%= form_tag(posts_path, :method => "get", id: "search-form", class:"form-horizontal", role:"form") do %>
+                                              <div class="form-group">
+                                                <label for="contain">Loại</label>
+                                                <%= select_tag :search_type, options_for_select({"Đang có" => "want_tag_id", "Đang cần" => "having_tag_id"}), class:"form-control"%>
+                                              </div>
+                                              <br>
+                                              <div class="form-group">
+                                                <label for="contain">Tag</label>
+                                                <%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :title), class:"form-control"%>
+                                              </div>
+                                              <br>
+                                              
+                                              
+                                        <% end %>
+                                        </div>
+                                    </div>
+                                    <%= button_tag(type: 'submit',class:"btn btn-primary") do %>
+                                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <% end %>
+                      </div>
                         
                     </div>
                 </div>

@@ -34,7 +34,6 @@ body{
     padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-bottom: 50px;
     text-align: center;
-    color: #f8f8f8;
     background: url(asset_path('banner-bg.jpg')) no-repeat center center;
     background-size: cover;
 }
@@ -43,12 +42,15 @@ body{
     position: relative;
     padding-top: 20%;
     padding-bottom: 20%;
+    
+    
 }
 
 .intro-message > h1 {
     margin: 0;
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
     font-size: 5em;
+    color: #f8f8f8;
 }
 
 .intro-divider {
@@ -59,6 +61,7 @@ body{
 
 .intro-message > h3 {
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    color: #f8f8f8;
 }
 
 @media(max-width:767px) {
@@ -165,6 +168,8 @@ p.copyright {
     margin: 15px 0 0;
 }
 
+/*search 1*/
+
 .stylish-input-group .input-group-addon{
     background: white !important; 
 }
@@ -177,4 +182,48 @@ p.copyright {
     border:0;
     background:transparent;
     color:#0f60d9;
+}
+
+
+/*search 2*/
+
+.dropdown.dropdown-lg .dropdown-menu {
+    margin-top: -1px;
+    padding: 6px 20px;
+}
+.input-group-btn .btn-group {
+    display: flex !important;
+}
+.btn-group .btn {
+    border-radius: 0;
+    margin-left: -1px;
+}
+.btn-group .btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.btn-group .form-horizontal .btn[type="submit"] {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+.form-group .form-control:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+@media screen and (min-width: 768px) {
+    #adv-search {
+        width: 500px;
+        margin: 0 auto;
+    }
+    .dropdown.dropdown-lg {
+        position: static !important;
+    }
+    .dropdown.dropdown-lg .dropdown-menu {
+        min-width: 500px;
+    }
 }
