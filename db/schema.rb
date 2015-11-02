@@ -26,12 +26,9 @@ ActiveRecord::Schema.define(version: 20151031032900) do
     t.integer  "user_id"
     t.string   "title"
     t.string   "description"
-    t.string   "images"
     t.boolean  "post_status"
-    t.integer  "having_tag_id"
-    t.integer  "want_tag_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.text     "imgs"
   end
 
