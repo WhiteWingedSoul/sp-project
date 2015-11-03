@@ -9,7 +9,24 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     if params[:search]
-      @posts = Post.search(params[:tag_id], params[:search], params[:search_type]).order("created_at DESC")
+      # @posts = Post.search(params[:tag_id], params[:search], params[:search_type]).order("created_at DESC")
+      if params[:search_type] == '0' 
+        array_post_id = TagWant.where(tag: params[:tag_id]).order("created_at DESC")
+        # abort array_post_id.inspect
+        @posts = []
+        array_post_id.each do |a|
+          tbi = Post.find(a.post)
+          @posts << tbi
+        end
+      else
+        array_post_id = TagHave.where(tag: params[:tag_id]).order("created_at DESC")
+        # abort array_post_id.inspect
+        @posts = []
+        array_post_id.each do |a|
+          tbi = Post.find(a.post)
+          @posts << tbi
+        end
+      end
     else
       @posts = Post.all.order('created_at DESC')
     end
@@ -95,8 +112,15 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
+    post_id = @post.id
 
     if @post.destroy
+      wants = TagWant.where(post: post_id)
+      wants.each { |a| a.destroy }
+      
+      haves = TagHave.where(post: post_id)
+      haves.each { |a| a.destroy  }
+      
       flash[:success] = "Post deleted successfully"
       redirect_to root_path
     end

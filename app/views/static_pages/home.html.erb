@@ -27,7 +27,7 @@
 
                                                   <div class="form-group stop-propagation">
                                                     <label for="contain">Loại</label>
-                                                    <%= select_tag :search_type, options_for_select({"Đang có" => "want_tag_id", "Đang cần" => "having_tag_id"}), class:"form-control"%>
+                                                    <%= select_tag :search_type, options_for_select({"Đang có" => 0, "Đang cần" => 1}), class:"form-control"%>
                                                   </div>
                                                   <br>
                                                   <div class="form-group stop-propagation">
