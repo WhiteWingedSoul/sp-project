@@ -40,4 +40,14 @@ class User < ActiveRecord::Base
     def name
         self.firstname+" "+self.lastname
     end
+    
+    acts_as_messageable
+
+    def mailboxer_name
+        self.name
+    end
+    
+    def mailboxer_email(object)
+        self.email
+    end
 end
