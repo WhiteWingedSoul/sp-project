@@ -4,52 +4,20 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
+  include PostsHelper
 
   # GET /posts
   # GET /posts.json
   def index
-    if params[:search]
-      # @posts = Post.search(params[:tag_id], params[:search], params[:search_type]).order("created_at DESC")
-      if params[:search_type] == '0' 
-        array_post_id = TagWant.where(tag: params[:tag_id]).order("created_at DESC")
-        # abort array_post_id.inspect
-        @posts = []
-        array_post_id.each do |a|
-          tbi = Post.find(a.post)
-          @posts << tbi
-        end
-      else
-        array_post_id = TagHave.where(tag: params[:tag_id]).order("created_at DESC")
-        # abort array_post_id.inspect
-        @posts = []
-        array_post_id.each do |a|
-          tbi = Post.find(a.post)
-          @posts << tbi
-        end
-      end
-    else
-      @posts = Post.all.order('created_at DESC')
-    end
+    @posts = GetPostToShow.new.get_post_to_show(params)
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
     @post_attachments = @post.post_attachments.all
-    @current_tag_have = []
-    @current_tag_want = []
-
-    all_tag_have = @post.tag_have.all
-    all_tag_have.each do |a|
-      tbi = Tag.find(a.tag)
-      @current_tag_have << tbi
-    end
-
-    all_tag_want = @post.tag_want.all
-    all_tag_want.each do |a|
-      tbi = Tag.find(a.tag)
-      @current_tag_want << tbi
-    end
+    get_tag_have(@post)
+    get_tag_want(@post)
   end
 
   # GET /posts/new
@@ -151,5 +119,38 @@ class PostsController < ApplicationController
         redirect_to login_path
       end
     end
+end
 
+class GetPostToShow
+  
+  def get_post_to_show(params)
+    if params[:search]
+      # @posts = Post.search(params[:tag_id], params[:search], params[:search_type]).order("created_at DESC")
+      tags = get_tag_id(params[:search_type], params[:tag_id])
+      posts = get_posts_from_tags(tags)
+    else
+      posts = Post.all.order('created_at DESC')
+    end
+    return posts
+  end
+  
+  private 
+  
+  def get_tag_id(type, tag_id)
+    if type == '0'
+      array_post_id = TagWant.where(tag: tag_id).order("created_at DESC")
+    else
+      array_post_id = TagHave.where(tag: tag_id).order("created_at DESC")
+    end
+    return array_post_id
+  end
+      
+  def get_posts_from_tags(tags)
+    posts = []
+    tags.each do |a|
+      tbi = Post.find(a.post)
+      posts << tbi
+    end
+    return posts
+  end
 end
