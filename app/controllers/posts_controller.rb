@@ -126,23 +126,33 @@ class GetPostToShow
   def get_post_to_show(params)
     if params[:search]
       # @posts = Post.search(params[:tag_id], params[:search], params[:search_type]).order("created_at DESC")
-      tags = get_tag_id(params[:search_type], params[:tag_id])
-      posts = get_posts_from_tags(tags)
+      posts = search_posts(params[:search_type], params[:tag_id])
     else
       posts = Post.all.order('created_at DESC')
     end
     return posts
   end
   
-  private 
+  def search_posts(type, tag_id)
+    tags = get_tag_id(check_type(type), tag_id)
+    posts = []
+    tags.each do |a|
+      tbi = Post.find(a.post)
+      posts << tbi
+    end
+    return posts
+  end
+  
+  def check_type(type)
+    if type == '0'
+      return TagWant
+    else
+      return TagHave
+    end
+  end
   
   def get_tag_id(type, tag_id)
-    if type == '0'
-      array_post_id = TagWant.where(tag: tag_id).order("created_at DESC")
-    else
-      array_post_id = TagHave.where(tag: tag_id).order("created_at DESC")
-    end
-    return array_post_id
+      type.where(tag: tag_id).order("created_at DESC")
   end
       
   def get_posts_from_tags(tags)
