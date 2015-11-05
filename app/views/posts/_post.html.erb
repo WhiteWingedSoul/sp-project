@@ -13,7 +13,7 @@
 <tr>
   <td>
     <strong>Tag:</strong>
-      <% Tag.get_tag_have(post).each do |tag| %>
+      <% Tag.get_tag(post, :tag_have).each do |tag| %>
         <%= tag.title %>
       <% end %>
   </td>
@@ -21,7 +21,7 @@
 <tr>
   <td>
     <strong>Want:</strong>
-      <% Tag.get_tag_want(post).each do |tag| %>
+      <% Tag.get_tag(post, :tag_want).each do |tag| %>
         <%= tag.title %>
       <% end %>
   </td>

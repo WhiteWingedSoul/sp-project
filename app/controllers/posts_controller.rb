@@ -4,7 +4,6 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
-  include PostsHelper
 
   # GET /posts
   # GET /posts.json
@@ -16,8 +15,8 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post_attachments = @post.post_attachments.all
-    @current_tag_have = Tag.get_tag_have(@post)
-    @current_tag_want = Tag.get_tag_want(@post)
+    @current_tag_have = Tag.get_tag(@post, :tag_have)
+    @current_tag_want = Tag.get_tag(@post, :tag_want)
   end
 
   # GET /posts/new
