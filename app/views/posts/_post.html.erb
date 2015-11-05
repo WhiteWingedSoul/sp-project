@@ -1,5 +1,3 @@
-<% get_tag_have(post) %>
-<% get_tag_want(post) %>
 <tr>
   <td>
     <strong>Title:</strong>
@@ -15,7 +13,7 @@
 <tr>
   <td>
     <strong>Tag:</strong>
-      <% @current_tag_have.each do |tag| %>
+      <% Tag.get_tag_have(post).each do |tag| %>
         <%= tag.title %>
       <% end %>
   </td>
@@ -23,7 +21,7 @@
 <tr>
   <td>
     <strong>Want:</strong>
-      <% @current_tag_want.each do |tag| %>
+      <% Tag.get_tag_want(post).each do |tag| %>
         <%= tag.title %>
       <% end %>
   </td>

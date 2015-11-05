@@ -16,8 +16,8 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post_attachments = @post.post_attachments.all
-    get_tag_have(@post)
-    get_tag_want(@post)
+    @current_tag_have = Tag.get_tag_have(@post)
+    @current_tag_want = Tag.get_tag_want(@post)
   end
 
   # GET /posts/new
