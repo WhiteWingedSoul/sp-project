@@ -1,3 +1,2 @@
-class TagWant < ActiveRecord::Base
-  belongs_to :post
+class TagWant < TagsInPost
 end
