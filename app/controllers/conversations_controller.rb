@@ -5,8 +5,7 @@ class ConversationsController < ApplicationController
   end
 
   def create
-    recipients = User.where(id: conversation_params[:recipients])
-    conversation = current_user.send_message(recipients, conversation_params[:body], conversation_params[:subject]).conversation
+    conversation = StartConversation.new.create(conversation_params, current_user)
     flash[:notice] = "Your message was successfully sent!"
     redirect_to conversation_path(conversation)
   end
@@ -43,5 +42,15 @@ class ConversationsController < ApplicationController
 
   def message_params
     params.require(:message).permit(:body, :subject)
+  end
+end
+
+class StartConversation
+  include SessionsHelper
+  
+  def create(conversation_params, current_user_params)
+    recipients = User.where(id: conversation_params[:recipients])
+    conversation = current_user_params.send_message(recipients, conversation_params[:body], conversation_params[:subject]).conversation
+    return conversation
   end
 end
