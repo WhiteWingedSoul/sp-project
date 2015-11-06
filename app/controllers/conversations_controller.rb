@@ -18,7 +18,7 @@ class ConversationsController < ApplicationController
 
   def reply
     current_user.reply_to_conversation(conversation, message_params[:body])
-    flash[:notice] = "Your reply message was successfully sent!"
+    show_flash(:notice, "Your reply message was successfully sent!")
     redirect_to conversation_path(conversation)
   end
 
