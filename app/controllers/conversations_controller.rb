@@ -6,7 +6,7 @@ class ConversationsController < ApplicationController
 
   def create
     conversation = StartConversation.new.create(conversation_params, current_user)
-    flash[:notice] = "Your message was successfully sent!"
+    show_flash(:notice, "Your message was successfully sent!")
     redirect_to conversation_path(conversation)
   end
 
@@ -15,7 +15,6 @@ class ConversationsController < ApplicationController
     # mark conversation as read
     conversation.mark_as_read(current_user)
   end
-
 
   def reply
     current_user.reply_to_conversation(conversation, message_params[:body])
@@ -33,7 +32,10 @@ class ConversationsController < ApplicationController
     redirect_to mailbox_inbox_path
   end
 
-
+  def show_flash(flash_type, flash_body)
+    flash[:flash_type] = flash_body 
+  end
+  
   private
 
   def conversation_params
