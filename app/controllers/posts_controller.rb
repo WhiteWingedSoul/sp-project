@@ -9,23 +9,10 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     if params[:search]
-      # @posts = Post.search(params[:tag_id], params[:search], params[:search_type]).order("created_at DESC")
       if params[:search_type] == '0' 
-        array_post_id = TagWant.where(tag: params[:tag_id]).order("created_at DESC")
-        # abort array_post_id.inspect
-        @posts = []
-        array_post_id.each do |a|
-          tbi = Post.find(a.post)
-          @posts << tbi
-        end
+        
       else
-        array_post_id = TagHave.where(tag: params[:tag_id]).order("created_at DESC")
-        # abort array_post_id.inspect
-        @posts = []
-        array_post_id.each do |a|
-          tbi = Post.find(a.post)
-          @posts << tbi
-        end
+        
       end
     else
       @posts = Post.all.order('created_at DESC')

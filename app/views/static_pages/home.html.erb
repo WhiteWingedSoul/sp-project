@@ -1,6 +1,12 @@
  <%= stylesheet_link_tag 'landing-page', media: 'all', 'data-turbolinks-track' => true %>
 
-
+<script>
+    $('.tags').select2({
+      theme: "bootstrap",
+      placeholder: "Hãy nhập tag loại đồ dùng",
+      multiple: true
+    });
+</script>
 
     <a name="about"></a>
     <div class="intro-header">
@@ -17,8 +23,7 @@
 
                         <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
                         <div class="input-group" id="adv-search">
-                            <%= text_field_tag :search, params[:search], placeholder: "Bạn đang muốn tìm món đồ gì......?", class:"form-control" %>
-
+                            <%= select_tag "search[]", options_from_collection_for_select(Tag.all, :id, :title), {class: 'tags form-control', multiple: 'multiple'} %>
                             <div class="input-group-btn">
                                 <div class="btn-group" role="group">
                                     <div class="dropdown dropdown-lg">
@@ -28,11 +33,6 @@
                                                   <div class="form-group stop-propagation">
                                                     <label for="contain">Loại</label>
                                                     <%= select_tag :search_type, options_for_select({"Đang có" => 0, "Đang cần" => 1}), class:"form-control"%>
-                                                  </div>
-                                                  <br>
-                                                  <div class="form-group stop-propagation">
-                                                    <label for="contain">Tag</label>
-                                                    <%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :title), class:"form-control"%>
                                                   </div>
                                                   <br>
                                         </div>
