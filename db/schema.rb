@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103090045) do
+ActiveRecord::Schema.define(version: 20151105031109) do
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
     t.integer "unsubscriber_id"
@@ -94,20 +94,21 @@ ActiveRecord::Schema.define(version: 20151103090045) do
 
   add_index "tag_haves", ["post_id"], name: "index_tag_haves_on_post_id"
 
-  create_table "tag_wants", force: :cascade do |t|
-    t.integer  "tag"
-    t.integer  "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "tag_wants", ["post_id"], name: "index_tag_wants_on_post_id"
-
   create_table "tags", force: :cascade do |t|
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "tags_in_posts", force: :cascade do |t|
+    t.integer  "tag"
+    t.integer  "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "type"
+  end
+
+  add_index "tags_in_posts", ["post_id"], name: "index_tags_in_posts_on_post_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "firstname"
