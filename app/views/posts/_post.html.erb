@@ -1,0 +1,46 @@
+<tr>
+  <td>
+    <strong>Title:</strong>
+    <%=post.title %>
+  </td>
+</tr>
+<tr>
+  <td>
+    <strong>Description:</strong>
+    <%=raw post.description %>
+  </td>
+</tr>
+<tr>
+  <td>
+    <strong>Tag:</strong>
+      <% Tag.get_tag(post, :tag_have).each do |tag| %>
+        <%= tag.title %>
+      <% end %>
+  </td>
+</tr>
+<tr>
+  <td>
+    <strong>Want:</strong>
+      <% Tag.get_tag(post, :tag_want).each do |tag| %>
+        <%= tag.title %>
+      <% end %>
+  </td>
+</tr>
+<tr>
+  <td>
+    <table>
+      <tr>
+        <td>
+          <%=link_to 'Show', post %> 
+        </td>
+        <td>
+          <%=link_to 'Edit', edit_post_path(post) %> 
+        </td>
+        <td>
+          <%=link_to 'Remove', post, method: :delete, data: { confirm: 'Are you sure?' } %> 
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr><td><hr></td></tr>

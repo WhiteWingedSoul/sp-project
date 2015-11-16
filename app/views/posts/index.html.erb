@@ -1,5 +1,4 @@
 <%= stylesheet_link_tag 'post-index', media: 'all', 'data-turbolinks-track' => true %>
-
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Posts</h1>
@@ -8,29 +7,12 @@
 
   <tbody>
     <% if @posts.present? %>
-		  <% @posts.each do |post| %>
-        <tr>
-          <td><%= post.title %></td>
-        </tr>
-        <tr>
-          <td><%= raw post.description %></td>
-        </tr>
-        <tr>
-          <td>
-            <table>
-              <tr>
-                <td><%= link_to 'Show', post %></td>
-                <td><%= link_to 'Edit', edit_post_path(post) %></td>
-                <td><%= link_to 'Remove', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        
-      <% end %>
-		<% else %>
-		  <p>There are no posts containing the term(s) .</p>
-		<% end %>
+	    <% @posts.each do |post| %>
+            <%= render post %>
+        <% end %>
+	<% else %>
+		<p>There are no posts containing the term(s) .</p>
+	<% end %>
     
   </tbody>
 </table>
@@ -39,7 +21,7 @@
 
 <%= link_to 'New Post', new_post_path %>
 
-<div class="container">
+<!-- <div class="container">
     <div class="well well-sm">
         <strong>Category Title</strong>
         <div class="btn-group">
@@ -177,4 +159,3 @@
         </div>
     </div>
 </div>
-
