@@ -10,9 +10,9 @@ class PostsController < ApplicationController
   def index
     if params[:search]
       if params[:search_type] == '0' 
-        
+        @posts = Post.search_by_tag_want(params[:search])
       else
-        
+        @posts = Post.search_by_tag_have(params[:search])
       end
     else
       @posts = Post.all.order('created_at DESC')
