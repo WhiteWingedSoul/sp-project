@@ -1,46 +1,44 @@
-<tr>
-  <td>
-    <strong>Title:</strong>
-    <%=post.title %>
-  </td>
-</tr>
-<tr>
-  <td>
-    <strong>Description:</strong>
-    <%=raw post.description %>
-  </td>
-</tr>
-<tr>
-  <td>
-    <strong>Tag:</strong>
-      <% Tag.get_tag(post, :tag_have).each do |tag| %>
-        <%= tag.title %>
-      <% end %>
-  </td>
-</tr>
-<tr>
-  <td>
-    <strong>Want:</strong>
-      <% Tag.get_tag(post, :tag_want).each do |tag| %>
-        <%= tag.title %>
-      <% end %>
-  </td>
-</tr>
-<tr>
-  <td>
-    <table>
-      <tr>
-        <td>
-          <%=link_to 'Show', post %> 
-        </td>
-        <td>
-          <%=link_to 'Edit', edit_post_path(post) %> 
-        </td>
-        <td>
-          <%=link_to 'Remove', post, method: :delete, data: { confirm: 'Are you sure?' } %> 
-        </td>
-      </tr>
-    </table>
-  </td>
-</tr>
-<tr><td><hr></td></tr>
+<div class="item col-xs-4 col-lg-4">
+  
+  <div class="thumbnail">
+    <div class="caption">
+        <div class="group inner list-group-item-heading">
+          <%= gravatar_for post.user, size: 50 %>
+          <%= post.user.name %>
+        </div>
+    </div>
+    <% post.post_attachments.all.each do |img| %>
+        <%= image_tag(img.avatar_url(:thumb), :size => "400x250") %>
+    <% end %>
+      <div class="caption">
+          <h4 class="group inner list-group-item-heading">
+              <%=post.title %></h4>
+          <p class="group inner list-group-item-text">
+              <%=raw post.description %></p>
+          <div class="row">
+              <div class="col-xs-12 col-md-12">
+                  <strong>Tag:</strong>
+                  <% Tag.get_tag(post, :tag_have).each do |tag| %>
+                    <%= tag.title %>
+                  <% end %>
+              </div>
+              <div class="col-xs-12 col-md-12">
+                  <strong>Want:</strong>
+                  <% Tag.get_tag(post, :tag_want).each do |tag| %>
+                    <%= tag.title %>
+                  <% end %>
+              </div>
+              <div class="col-xs-12 col-md-12">
+                  <br>
+              </div>
+
+              <div class="col-xs-12 col-md-8">
+                  <%=link_to 'Show', post, class:"btn btn-success" %> 
+              </div>
+              <div class="col-xs-12 col-md-3">
+                   <%=link_to 'Remove', post, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %> 
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

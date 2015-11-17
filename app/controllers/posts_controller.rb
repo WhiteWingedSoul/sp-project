@@ -75,7 +75,7 @@ class PostsController < ApplicationController
         end
 
         flash[:success] = "Post created successfully!"
-        redirect_to root_path
+        redirect_to @post
       else
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }

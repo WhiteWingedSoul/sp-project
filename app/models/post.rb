@@ -8,4 +8,5 @@ class Post < ActiveRecord::Base
   def self.search(tag, title, type)
     where('title LIKE ? and '+"#{type}"+' = ?', "%#{title}%", tag) 
   end
+  
 end

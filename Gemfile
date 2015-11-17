@@ -41,7 +41,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 # Img uploader
-gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'carrierwave'
 gem 'ckeditor'
 gem 'select2-rails'
 gem 'jquery-turbolinks'

@@ -1,9 +1,6 @@
  <%= stylesheet_link_tag 'show-post', media: 'all', 'data-turbolinks-track' => true %>
 
 <p id="notice"><%= notice %></p>
-<% if flash[:success] %>
-  <div class="alert alert-success"><%= flash[:success] %></div>
-<% end %>
 <p>
   <strong>Title:</strong>
   <%= @post.title %>
