@@ -12,7 +12,18 @@
     <% end %>
       <div class="caption">
           <h4 class="group inner list-group-item-heading">
-              <%=post.title %></h4>
+                <div class="col-md-9">
+                <%=post.title %>
+              </div>
+              <div class="col-md-2">
+                <% if post.post_status %>
+      					 <div class="product-open">Open</div>
+      					<% else %>
+      					 <div class="product-close">Closed</div>
+      					<% end %>
+              </div>
+          </h4>
+          <br>
           <p class="group inner list-group-item-text">
               <%=raw post.description %></p>
           <div class="row">

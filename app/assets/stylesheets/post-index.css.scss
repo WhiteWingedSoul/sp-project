@@ -8,9 +8,25 @@
     border-radius: 0px;
 }
 
+.product-open{
+	color: #74DF00;
+	font-size: 18px;
+	padding-right: 5px;
+}
+
+.product-close{
+	color: #AF0F0F;
+	font-size: 18px;
+	padding-right: 5px;
+}
+
 .thumbnail .caption {
   padding: 20px;
   color: #333333;
+}
+
+.item.list-group-item-heading{
+    font-size: 22px;
 }
 
 .item.list-group-item

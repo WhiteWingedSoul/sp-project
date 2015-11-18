@@ -1,9 +1,9 @@
 require 'carrierwave/orm/activerecord'
 
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :close]
-  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy, :close]
-  before_action :correct_user, only: [:edit, :update, :close]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :close, :reopen]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy, :close, :reopen]
+  before_action :correct_user, only: [:edit, :update, :close, :reopen]
 
   # GET /posts
   # GET /posts.json
@@ -18,7 +18,7 @@ class PostsController < ApplicationController
       if params[:user_posts]
         @posts = current_user.posts
       else
-        @posts = Post.where.not(post_status: true).order('created_at DESC')
+        @posts = Post.where(post_status: true).order('created_at DESC')
       end
     end
   end
@@ -119,6 +119,13 @@ class PostsController < ApplicationController
   def close
     if @post.update(post_status: false)
       flash[:success] = "Bài đăng đã được đóng lại"
+      redirect_to @post
+    end
+  end
+  
+  def reopen
+    if @post.update(post_status: true)
+      flash[:success] = "Bài đăng đã được mở lại"
       redirect_to @post
     end
   end
