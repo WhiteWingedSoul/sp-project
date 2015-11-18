@@ -38,7 +38,9 @@
   </ul>
 </p>
 
+<% if current_user.id == @post.user_id %>
 <%= link_to 'Close Post', {:action => :close}, :class => 'btn btn-danger' %><br><br>
+<% end %>
 <%= link_to 'Edit', edit_post_path(@post), :class => 'btn btn-primary' %>
 <%= link_to 'Back', posts_path, :class => 'btn btn-warning' %>
 <!--

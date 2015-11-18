@@ -102,12 +102,6 @@ class PostsController < ApplicationController
   def destroy
     post_id = @post.id
 
-    unless @post.user_id == current_user.id
-      flash[:error] = "Bạn không thể xoá bài đăng của người khác!"
-      redirect_to action: "index"
-      return
-    end
-
     if @post.destroy
       wants = TagWant.where(post: post_id)
       wants.each { |a| a.destroy }
@@ -121,12 +115,6 @@ class PostsController < ApplicationController
   end
   
   def close
-    unless @post.user_id == current_user.id
-      flash[:error] = "Bạn không thể đóng bài đăng của người khác!"
-      redirect_to action: "index"
-      return
-    end
-    
     if @post.update(post_status: true)
       flash[:success] = "Bài đăng đã được đóng lại"
       redirect_to action: "index"

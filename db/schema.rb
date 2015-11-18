@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103090045) do
+ActiveRecord::Schema.define(version: 20151117170259) do
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
     t.integer "unsubscriber_id"
@@ -84,6 +84,18 @@ ActiveRecord::Schema.define(version: 20151103090045) do
     t.datetime "updated_at",  null: false
     t.text     "imgs"
   end
+
+  create_table "replies", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.text     "content"
+    t.boolean  "is_unread"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "replies", ["post_id"], name: "index_replies_on_post_id"
+  add_index "replies", ["user_id"], name: "index_replies_on_user_id"
 
   create_table "tag_haves", force: :cascade do |t|
     t.integer  "tag"
