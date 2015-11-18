@@ -23,6 +23,9 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post_attachments = @post.post_attachments.all
+    @replies = @post.replies.all.order('created_at DESC')
+    # abort @replies.inspect
+    
     @current_tag_have = []
     @current_tag_want = []
 
@@ -87,6 +90,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
+      # abort params.inspect
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
@@ -129,7 +133,7 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:user_id, :title, :description, :date_modified, :post_status, post_attachments_attributes: [:id, :post_id, :avatar])
+      params.require(:post).permit(:user_id, :title, :description, :date_modified, :post_status, replies_attributes: [:id, :post_id, :user_id, :content, :created_at, :is_unread], post_attachments_attributes: [:id, :post_id, :avatar])
     end
 
     def correct_user
