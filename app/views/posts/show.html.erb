@@ -40,10 +40,10 @@
 
 <strong>Các bài trả lời cho bài đăng:</strong>
 <% @replies.each do |reply| %>
-	<div class="highlight">
-		<p><%= reply.user.firstname + " " + reply.user.lastname %></p>
-		<p><%= reply.created_at %></p>
-		<p><%= reply.content %></p>
+	<div class="highlight" style="border-size:2px;border-style:solid;border-color:black">
+		<h2 style="margin:left"><%= reply.user.firstname + " " + reply.user.lastname %></h2>
+		<h3><%= reply.created_at %></h3>
+		<p><%= raw reply.content %></p>
 	</div>
 <% end %>
 

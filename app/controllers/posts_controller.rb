@@ -89,16 +89,10 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    respond_to do |format|
-      # abort params.inspect
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
+    # abort params[:post].inspect
+    @post.replies.create!(:content => params[:post][:reply][:content], :user_id => current_user.id, :is_unread => true)
+    flash[:success] = "Đăng thành công bài trả lời"
+    redirect_to @post
   end
 
   # DELETE /posts/1
