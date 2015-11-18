@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
   accepts_nested_attributes_for :post_attachments
   has_many :tag_have
   has_many :tag_want
+  has_many :replies
   
   def self.search_by_tag_have(tag_array)
     # tag_post_array = TagHave.where("tag IN (?)", tag_array).uniq

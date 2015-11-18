@@ -1,9 +1,9 @@
 require 'carrierwave/orm/activerecord'
 
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :close]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy, :close]
+  before_action :correct_user, only: [:edit, :update, :close]
 
   # GET /posts
   # GET /posts.json
@@ -15,7 +15,7 @@ class PostsController < ApplicationController
         @posts = Post.search_by_tag_have(params[:search])
       end
     else
-      @posts = Post.all.order('created_at DESC')
+      @posts = Post.where.not(post_status: true).order('created_at DESC')
     end
   end
 
@@ -57,6 +57,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = current_user.posts.create(post_params)
+    @post.post_status = false
       if @post.save
         params[:post]['tag_have'].each do |tag|
           if tag != ''
@@ -101,6 +102,12 @@ class PostsController < ApplicationController
   def destroy
     post_id = @post.id
 
+    unless @post.user_id == current_user.id
+      flash[:error] = "Bạn không thể xoá bài đăng của người khác!"
+      redirect_to action: "index"
+      return
+    end
+
     if @post.destroy
       wants = TagWant.where(post: post_id)
       wants.each { |a| a.destroy }
@@ -110,6 +117,19 @@ class PostsController < ApplicationController
       
       flash[:success] = "Post deleted successfully"
       redirect_to root_path
+    end
+  end
+  
+  def close
+    unless @post.user_id == current_user.id
+      flash[:error] = "Bạn không thể đóng bài đăng của người khác!"
+      redirect_to action: "index"
+      return
+    end
+    
+    if @post.update(post_status: true)
+      flash[:success] = "Bài đăng đã được đóng lại"
+      redirect_to action: "index"
     end
   end
 
