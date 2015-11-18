@@ -4,7 +4,7 @@
     <div class="caption">
         <div class="group inner list-group-item-heading">
           <%= gravatar_for post.user, size: 50 %>
-          <%= post.user.name %>
+          <%= link_to post.user.name, post.user %>
         </div>
     </div>
     <% post.post_attachments.all.each do |img| %>

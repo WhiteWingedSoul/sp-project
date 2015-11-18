@@ -15,7 +15,11 @@ class PostsController < ApplicationController
         @posts = Post.search_by_tag_have(params[:search])
       end
     else
-      @posts = Post.where.not(post_status: true).order('created_at DESC')
+      if params[:user_posts]
+        @posts = current_user.posts
+      else
+        @posts = Post.where.not(post_status: true).order('created_at DESC')
+      end
     end
   end
 
@@ -119,7 +123,7 @@ class PostsController < ApplicationController
   end
   
   def close
-    if @post.update(post_status: true)
+    if @post.update(post_status: false)
       flash[:success] = "Bài đăng đã được đóng lại"
       redirect_to action: "index"
     end

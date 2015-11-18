@@ -5,7 +5,7 @@
             <ul class = "nav navbar-nav navbar-right">
                 <% if logged_in? %>
                     <li><%= link_to "New offer", new_post_path %></li>
-                    <li><%= link_to "My offer", "#" %></li>
+                    <li><%= link_to "My offer",  posts_path(:user_posts => "1") %></li>
                     <li><%= link_to "Users", users_path %></li>
                     <li><%= link_to "Posts", posts_path %></li>
                     <li class="dropdown">
@@ -20,7 +20,7 @@
                                     <span>Inbox</span>
                                 <% end %>
                             </li>
-                            <li><%= link_to "Setting", "# " %></li>
+                            <li><%= link_to "Setting", edit_user_path(current_user) %></li>
                             <li class="divider"></li>
                             
                             <li><%= link_to "Logout", logout_path, method: "delete" %></li>
