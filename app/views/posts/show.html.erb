@@ -1,73 +1,4 @@
  <%= stylesheet_link_tag 'show-post', media: 'all', 'data-turbolinks-track' => true %>
-
-<p id="notice"><%= notice %></p>
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= raw @post.description %>
-</p>
-
-<p>
-  <strong>Images:</strong>
-  <ul>
-  <% @post_attachments.each do |img| %>
-    <li><%= image_tag img.avatar_url %></li>
-  <% end %>
-  </ul>
-</p>
-
-<p>
-  <strong>Tag đồ vật muốn đổi đi:</strong>
-  <ul>
-    <% @current_tag_have.each do |tag| %>
-    <li><%= tag.title %></li>
-    <% end %>
-  </ul>
-</p>
-
-<p>
-  <strong>Tag đồ vật muốn nhận lại:</strong>
-  <ul>
-    <% @current_tag_want.each do |tag| %>
-    <li><%= tag.title %></li>
-    <% end %>
-  </ul>
-</p>
-
-<strong>Các bài trả lời cho bài đăng:</strong>
-<% @replies.each do |reply| %>
-	<div class="highlight">
-		<p><%= reply.user.firstname + " " + reply.user.lastname %></p>
-		<p><%= reply.created_at %></p>
-		<p><%= reply.content %></p>
-	</div>
-<% end %>
-
-<%= form_for(@post, :html => { :multipart => true }) do |f| %>
-	<div class="field">
-		<p>Đăng lên trả lời của bạn</p>
-		<%= f.fields_for :reply do |p| %>
-			<div class="field">
-				<%= p.cktext_area :content %>
-			</div>
-		<% end %>
-	</div><br>
-	<div class="action">
-		<%= f.submit 'Post reply', :class => 'btn btn-primary pull-right' %>
-	</div>
-<% end %>
-
-<br>
-<% if current_user.id == @post.user_id %>
-<%= link_to 'Close Post', {:action => :close}, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
-<% end %>
-<%= link_to 'Edit', edit_post_path(@post), :class => 'btn btn-primary' %>
-<%= link_to 'Back', posts_path, :class => 'btn btn-warning' %>
-
 <div class="container-fluid">
     <div class="content-wrapper">	
 		<div class="item-container">	
@@ -118,7 +49,7 @@
 							<%= link_to 'Edit content', edit_post_path(@post), class:"btn btn-success" %>
 						</div>
 						<div class="btn-group wishlist">
-							<%= link_to 'Close offer', posts_path, class:"btn btn-danger" %>
+							<%= link_to 'Close offer', {:action => :close}, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
 						</div>
 					
 					</div>
@@ -141,20 +72,31 @@
 						<div class="tab-pane fade in active" id="service-one">
 						 
 							<section class="container product-info">
-								The Corsair Gaming Series GS600 power supply is the ideal price-performance solution for building or upgrading a Gaming PC. A single +12V rail provides up to 48A of reliable, continuous power for multi-core gaming PCs with multiple graphics cards. The ultra-quiet, dual ball-bearing fan automatically adjusts its speed according to temperature, so it will never intrude on your music and games. Blue LEDs bathe the transparent fan blades in a cool glow. Not feeling blue? You can turn off the lighting with the press of a button.
+								
+								<strong>Các bài trả lời cho bài đăng:</strong>
+								<% @replies.each do |reply| %>
+									<div class="highlight">
+										<p><%= reply.user.firstname + " " + reply.user.lastname %></p>
+										<p><%= reply.created_at %></p>
+										<p><%= reply.content %></p>
+									</div>
+								<% end %>
+								
+								<%= form_for(@post, :html => { :multipart => true }) do |f| %>
+									<div class="field">
+										<p>Đăng lên trả lời của bạn</p>
+										<%= f.fields_for :reply do |p| %>
+											<div class="field">
+												<%= p.cktext_area :content %>
+											</div>
+										<% end %>
+									</div><br>
+									<div class="action">
+										<%= f.submit 'Post reply', :class => 'btn btn-primary pull-right' %>
+									</div>
+								<% end %>
 
-								<h3>Corsair Gaming Series GS600 Features:</h3>
-								<li>It supports the latest ATX12V v2.3 standard and is backward compatible with ATX12V 2.2 and ATX12V 2.01 systems</li>
-								<li>An ultra-quiet 140mm double ball-bearing fan delivers great airflow at an very low noise level by varying fan speed in response to temperature</li>
-								<li>80Plus certified to deliver 80% efficiency or higher at normal load conditions (20% to 100% load)</li>
-								<li>0.99 Active Power Factor Correction provides clean and reliable power</li>
-								<li>Universal AC input from 90~264V — no more hassle of flipping that tiny red switch to select the voltage input!</li>
-								<li>Extra long fully-sleeved cables support full tower chassis</li>
-								<li>A three year warranty and lifetime access to Corsair’s legendary technical support and customer service</li>
-								<li>Over Current/Voltage/Power Protection, Under Voltage Protection and Short Circuit Protection provide complete component safety</li>
-								<li>Dimensions: 150mm(W) x 86mm(H) x 160mm(L)</li>
-								<li>MTBF: 100,000 hours</li>
-								<li>Safety Approvals: UL, CUL, CE, CB, FCC Class B, TÜV, CCC, C-tick</li>
+								
 							</section>
 										  
 						</div>
@@ -174,3 +116,4 @@
 		</div>
 	</div>
 </div>
+
