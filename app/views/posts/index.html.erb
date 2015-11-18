@@ -1,4 +1,7 @@
 <%= stylesheet_link_tag 'post-index', media: 'all', 'data-turbolinks-track' => true %>
+    <% if flash[:error] %>
+    <div class="alert alert-danger"><%= flash[:error] %></div>
+    <% end %>
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Posts</h1>

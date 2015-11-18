@@ -13,7 +13,11 @@ Rails.application.routes.draw do
   
   delete 'logout' => 'sessions#destroy'
 
-  resources :posts
+  resources :posts do
+    member do
+      get :close
+    end
+  end
   resources :users
   
   # mailbox folder routes

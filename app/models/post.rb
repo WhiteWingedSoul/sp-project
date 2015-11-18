@@ -1,9 +1,11 @@
 class Post < ActiveRecord::Base
   belongs_to:user
   has_many :post_attachments, dependent: :destroy
-  accepts_nested_attributes_for :post_attachments
+  accepts_nested_attributes_for :post_attachments, allow_destroy: true
   has_many :tag_have
   has_many :tag_want
+  has_many :replies, dependent: :destroy
+  accepts_nested_attributes_for :replies, allow_destroy: true
   
   def self.search_by_tag_have(tag_array)
     # tag_post_array = TagHave.where("tag IN (?)", tag_array).uniq

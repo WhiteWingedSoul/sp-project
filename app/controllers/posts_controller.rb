@@ -1,9 +1,9 @@
 require 'carrierwave/orm/activerecord'
 
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :close]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy, :close]
+  before_action :correct_user, only: [:edit, :update, :close]
 
   # GET /posts
   # GET /posts.json
@@ -15,7 +15,7 @@ class PostsController < ApplicationController
         @posts = Post.search_by_tag_have(params[:search])
       end
     else
-      @posts = Post.all.order('created_at DESC')
+      @posts = Post.where.not(post_status: true).order('created_at DESC')
     end
   end
 
@@ -23,6 +23,9 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post_attachments = @post.post_attachments.all
+    @replies = @post.replies.all.order('created_at DESC')
+    # abort @replies.inspect
+    
     @current_tag_have = []
     @current_tag_want = []
 
@@ -57,6 +60,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = current_user.posts.create(post_params)
+    @post.post_status = false
       if @post.save
         params[:post]['tag_have'].each do |tag|
           if tag != ''
@@ -86,6 +90,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
+      # abort params.inspect
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
@@ -112,6 +117,13 @@ class PostsController < ApplicationController
       redirect_to root_path
     end
   end
+  
+  def close
+    if @post.update(post_status: true)
+      flash[:success] = "Bài đăng đã được đóng lại"
+      redirect_to action: "index"
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -121,7 +133,7 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:user_id, :title, :description, :date_modified, :post_status, post_attachments_attributes: [:id, :post_id, :avatar])
+      params.require(:post).permit(:user_id, :title, :description, :date_modified, :post_status, replies_attributes: [:id, :post_id, :user_id, :content, :created_at, :is_unread], post_attachments_attributes: [:id, :post_id, :avatar])
     end
 
     def correct_user

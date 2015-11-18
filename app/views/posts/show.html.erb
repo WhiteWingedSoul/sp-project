@@ -38,13 +38,35 @@
   </ul>
 </p>
 
-<p>
-  <strong>Post status:</strong>
-  <%= @post.post_status %>
-</p>
+<strong>Các bài trả lời cho bài đăng:</strong>
+<% @replies.each do |reply| %>
+	<div class="highlight">
+		<p><%= reply.user.firstname + " " + reply.user.lastname %></p>
+		<p><%= reply.created_at %></p>
+		<p><%= reply.content %></p>
+	</div>
+<% end %>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<%= form_for(@post, :html => { :multipart => true }) do |f| %>
+	<div class="field">
+		<p>Đăng lên trả lời của bạn</p>
+		<%= f.fields_for :reply do |p| %>
+			<div class="field">
+				<%= p.cktext_area :content %>
+			</div>
+		<% end %>
+	</div><br>
+	<div class="action">
+		<%= f.submit 'Post reply', :class => 'btn btn-primary pull-right' %>
+	</div>
+<% end %>
+
+<br>
+<% if current_user.id == @post.user_id %>
+<%= link_to 'Close Post', {:action => :close}, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+<% end %>
+<%= link_to 'Edit', edit_post_path(@post), :class => 'btn btn-primary' %>
+<%= link_to 'Back', posts_path, :class => 'btn btn-warning' %>
 
 <div class="container-fluid">
     <div class="content-wrapper">	
