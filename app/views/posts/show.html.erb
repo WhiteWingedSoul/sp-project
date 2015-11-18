@@ -1,4 +1,74 @@
  <%= stylesheet_link_tag 'show-post', media: 'all', 'data-turbolinks-track' => true %>
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= raw @post.description %>
+</p>
+
+<p>
+  <strong>Images:</strong>
+  <ul>
+  <% @post_attachments.each do |img| %>
+    <li><%= image_tag img.avatar_url %></li>
+  <% end %>
+  </ul>
+</p>
+
+<p>
+  <strong>Tag đồ vật muốn đổi đi:</strong>
+  <ul>
+    <% @current_tag_have.each do |tag| %>
+    <li><%= tag.title %></li>
+    <% end %>
+  </ul>
+</p>
+
+<p>
+  <strong>Tag đồ vật muốn nhận lại:</strong>
+  <ul>
+    <% @current_tag_want.each do |tag| %>
+    <li><%= tag.title %></li>
+    <% end %>
+  </ul>
+</p>
+
+<strong>Các bài trả lời cho bài đăng:</strong>
+<% @replies.each do |reply| %>
+	<div class="highlight" style="border-size:2px;border-style:solid;border-color:black">
+		<h2 style="margin:left"><%= reply.user.firstname + " " + reply.user.lastname %></h2>
+		<h3><%= reply.created_at %></h3>
+		<p><%= raw reply.content %></p>
+	</div>
+<% end %>
+
+<% if @post.post_status == true %>
+<%= form_for(@post, :html => { :multipart => true }) do |f| %>
+	<div class="field">
+		<p>Đăng lên trả lời của bạn</p>
+		<%= f.fields_for :reply do |p| %>
+			<div class="field">
+				<%= p.cktext_area :content %>
+			</div>
+		<% end %>
+	</div><br>
+	<div class="action">
+		<%= f.submit 'Post reply', :class => 'btn btn-primary pull-right' %>
+	</div>
+<% end %>
+<% end %>
+
+<br>
+<% if current_user.id == @post.user_id && @post.post_status == true %>
+<%= link_to 'Close Post', {:action => :close}, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+<% end %>
+<%= link_to 'Edit', edit_post_path(@post), :class => 'btn btn-primary' %>
+<%= link_to 'Back', posts_path, :class => 'btn btn-warning' %>
+<!--
 <div class="container-fluid">
     <div class="content-wrapper">	
 		<div class="item-container">	

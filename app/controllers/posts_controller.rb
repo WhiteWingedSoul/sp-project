@@ -64,7 +64,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = current_user.posts.create(post_params)
-    @post.post_status = false
+    @post.post_status = true
       if @post.save
         params[:post]['tag_have'].each do |tag|
           if tag != ''
@@ -93,16 +93,10 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    respond_to do |format|
-      # abort params.inspect
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
+    # abort params[:post].inspect
+    @post.replies.create!(:content => params[:post][:reply][:content], :user_id => current_user.id, :is_unread => true)
+    flash[:success] = "Đăng thành công bài trả lời"
+    redirect_to @post
   end
 
   # DELETE /posts/1
@@ -125,7 +119,7 @@ class PostsController < ApplicationController
   def close
     if @post.update(post_status: false)
       flash[:success] = "Bài đăng đã được đóng lại"
-      redirect_to action: "index"
+      redirect_to @post
     end
   end
 
