@@ -15,7 +15,7 @@ class PostsController < ApplicationController
         @posts = Post.search_by_tag_have(params[:search])
       end
     else
-      @posts = Post.where.not(post_status: true).order('created_at DESC')
+      @posts = Post.all.order('created_at DESC')
     end
   end
 
@@ -60,7 +60,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = current_user.posts.create(post_params)
-    @post.post_status = false
+    @post.post_status = true
       if @post.save
         params[:post]['tag_have'].each do |tag|
           if tag != ''
@@ -113,9 +113,9 @@ class PostsController < ApplicationController
   end
   
   def close
-    if @post.update(post_status: true)
+    if @post.update(post_status: false)
       flash[:success] = "Bài đăng đã được đóng lại"
-      redirect_to action: "index"
+      redirect_to @post
     end
   end
 

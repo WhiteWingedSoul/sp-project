@@ -46,6 +46,7 @@
 	</div>
 <% end %>
 
+<% if @post.post_status == true %>
 <%= form_for(@post, :html => { :multipart => true }) do |f| %>
 	<div class="field">
 		<p>Đăng lên trả lời của bạn</p>
@@ -59,9 +60,10 @@
 		<%= f.submit 'Post reply', :class => 'btn btn-primary pull-right' %>
 	</div>
 <% end %>
+<% end %>
 
 <br>
-<% if current_user.id == @post.user_id %>
+<% if current_user.id == @post.user_id && @post.post_status == true %>
 <%= link_to 'Close Post', {:action => :close}, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
 <% end %>
 <%= link_to 'Edit', edit_post_path(@post), :class => 'btn btn-primary' %>
