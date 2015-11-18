@@ -10,7 +10,9 @@
       </ul>
     </div>
   <% end %>
-
+  
+  <%= f.hidden_field :post_status, :value => true %>
+  
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title, :class => 'form-control', :required => true %>

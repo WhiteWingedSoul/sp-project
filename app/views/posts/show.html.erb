@@ -45,49 +45,60 @@
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
-<!--
+
 <div class="container-fluid">
     <div class="content-wrapper">	
 		<div class="item-container">	
+		<div class="product-title"><%= gravatar_for @post.user, size: 50 %>
+          													 <%= @post.user.name %></div>
+          													 <hr>
 			<div class="container">	
 				<div class="col-md-12">
-					<div class="product col-md-3 service-image-left">
+					<div class="product col-md-5 service-image-left">
                     
 						<center>
-							<img id="item-display" src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt=""></img>
+							<% @post.post_attachments.all.each do |img| %>
+					        <%= image_tag(img.avatar_url) %>
+					    <% end %>
 						</center>
 					</div>
 					
-					<div class="container service1-items col-sm-2 col-md-2 pull-left">
-						<center>
-							<a id="item-1" class="service1-item">
-								<img src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt=""></img>
-							</a>
-							<a id="item-2" class="service1-item">
-								<img src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt=""></img>
-							</a>
-							<a id="item-3" class="service1-item">
-								<img src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt=""></img>
-							</a>
-						</center>
-					</div>
 					<div class="col-md-7">
-					<div class="product-title">Corsair GS600 600 Watt PSU</div>
-					<div class="product-desc">The Corsair Gaming Series GS600 is the ideal price/performance choice for mid-spec gaming PC</div>
+					
+          													 
+					<div class="product-title"><%= @post.title %></div>
+					<div class="product-desc"><%= raw @post.description %></div>
 					<div class="product-rating"><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> </div>
 					<hr>
-					<div class="product-price">$ 1234.00</div>
-					<div class="product-stock">In Stock</div>
-					<hr>
-					<div class="btn-group cart">
-						<button type="button" class="btn btn-success">
-							Add to cart 
-						</button>
+					<div class="product-price"><strong>Tag:</strong>
+					    <% @current_tag_have.each do |tag| %>
+					    <%= tag.title %>
+					    <% end %>
 					</div>
-					<div class="btn-group wishlist">
-						<button type="button" class="btn btn-danger">
-							Add to wishlist 
-						</button>
+					<div class="product-price"><strong>Want:</strong>
+					    <% @current_tag_want.each do |tag| %>
+					    <%= tag.title %>
+					    <% end %>
+					</div>
+  				<hr>
+  				<% if @post.post_status %>
+					 <div class="product-open">Open</div>
+					<% else %>
+					 <div class="product-close">Closed</div>
+					<% end %>
+					
+					<hr>
+					<div class="col-md-7">
+					</div>
+					<div class="col-md-5">
+					
+						<div class="btn-group cart">
+							<%= link_to 'Edit content', edit_post_path(@post), class:"btn btn-success" %>
+						</div>
+						<div class="btn-group wishlist">
+							<%= link_to 'Close offer', posts_path, class:"btn btn-danger" %>
+						</div>
+					
 					</div>
 				</div>
 				</div>
@@ -99,9 +110,9 @@
 			<div class="col-md-12 product-info">
 					<ul id="myTab" class="nav nav-tabs nav_tabs">
 						
-						<li class="active"><a href="#service-one" data-toggle="tab">DESCRIPTION</a></li>
+						<li class="active"><a href="#service-one" data-toggle="tab">REVIEWS</a></li>
 						<li><a href="#service-two" data-toggle="tab">PRODUCT INFO</a></li>
-						<li><a href="#service-three" data-toggle="tab">REVIEWS</a></li>
+						<li><a href="#service-three" data-toggle="tab">DESCRIPTION</a></li>
 						
 					</ul>
 				<div id="myTabContent" class="tab-content">
@@ -140,4 +151,4 @@
 			</div>
 		</div>
 	</div>
-</div>-->
+</div>

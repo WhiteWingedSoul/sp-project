@@ -16,7 +16,6 @@
 
 .product{
 	border: 1px solid #dddddd;
-	height: 321px;
 }
 
 .product>img{
@@ -25,7 +24,7 @@
 
 .product-rating{
 	font-size: 20px;
-	margin-bottom: 25px;
+
 }
 
 .product-title{
@@ -37,14 +36,21 @@
 }
 
 .product-price{
-	font-size: 22px;
+	font-size: 15px;
 }
 
-.product-stock{
+.product-open{
 	color: #74DF00;
 	font-size: 20px;
 	margin-top: 10px;
 }
+
+.product-close{
+	color: #AF0F0F;
+	font-size: 20px;
+	margin-top: 10px;
+}
+
 
 .product-info{
 		margin-top: 50px;
