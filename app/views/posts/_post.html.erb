@@ -3,8 +3,18 @@
   <div class="thumbnail">
     <div class="caption">
         <div class="group inner list-group-item-heading">
+          <div class="col-md-12">
           <%= gravatar_for post.user, size: 50 %>
           <%= link_to post.user.name, post.user %>
+          </div>
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-8">
+          <%= time_ago_in_words(post.created_at) %> ago.
+          </div>
+          <div class="col-md-12">
+          <hr>
+          </div>
         </div>
     </div>
     <% post.post_attachments.all.each do |img| %>
@@ -12,18 +22,22 @@
     <% end %>
       <div class="caption">
           <h4 class="group inner list-group-item-heading">
-                <div class="col-md-9">
+              <div class="col-md-9">
                 <%=post.title %>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <% if post.post_status %>
       					 <div class="product-open">Open</div>
       					<% else %>
       					 <div class="product-close">Closed</div>
       					<% end %>
               </div>
+              <div class="col-md-12">
+                <hr>
+              </div>
+              
           </h4>
-          <br>
+          
           <p class="group inner list-group-item-text">
               <%=raw post.description %></p>
           <div class="row">

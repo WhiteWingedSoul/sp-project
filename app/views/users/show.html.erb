@@ -18,7 +18,12 @@
               </div>
             </li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span><%= @user.created_at.strftime("%d-%b-%Y") %></li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Last seen</strong></span> Yesterday</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Last seen</strong></span>
+            <% if(@user.last_login.nil?) %>
+              Yesterday
+            <% else %>
+              <%= time_ago_in_words(@user.last_login) %> ago
+            <% end %></li>
             
           </ul> 
                

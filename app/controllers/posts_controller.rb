@@ -112,7 +112,7 @@ class PostsController < ApplicationController
       haves.each { |a| a.destroy  }
       
       flash[:success] = "Post deleted successfully"
-      redirect_to root_path
+      redirect_to posts_path
     end
   end
   

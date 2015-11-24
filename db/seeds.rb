@@ -20,3 +20,15 @@ Tag.create("title"=>"Laptop")
 Tag.create("title"=>"Linh kiện điện tử")
 Tag.create("title"=>"Đĩa CD")
 Tag.create("title"=>"Xe máy")
+
+User.create!(firstname:  "Hoang",
+             lastname: "Viet",
+             email: "cooro1994@yahoo.com",
+             gender: "1",
+             birthday: "1994-06-22",
+             tel: "0902239958",
+             skype: "cooro1994",
+             facebook: "https://www.facebook.com/White.Winged.Soul",
+             password:              "738798",
+             password_confirmation: "738798",
+             admin:     true)
