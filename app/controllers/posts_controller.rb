@@ -10,15 +10,15 @@ class PostsController < ApplicationController
   def index
     if params[:search]
       if params[:search_type] == '0' 
-        @posts = Post.search_by_tag_want(params[:search])
+        @posts = Post.search_by_tag_want(params[:search]).paginate(page: params[:page], :per_page => 6)
       else
-        @posts = Post.search_by_tag_have(params[:search])
+        @posts = Post.search_by_tag_have(params[:search]).paginate(page: params[:page], :per_page => 6)
       end
     else
       if params[:user_posts]
-        @posts = current_user.posts
+        @posts = current_user.posts.paginate(page: params[:page], :per_page => 6)
       else
-        @posts = Post.where(post_status: true).order('created_at DESC')
+        @posts = Post.where(post_status: true).order('created_at DESC').paginate(page: params[:page], :per_page => 6)
       end
     end
   end

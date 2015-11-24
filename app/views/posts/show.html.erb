@@ -20,7 +20,6 @@
 			<div class="container">	
 				<div class="col-md-12">
 					<div class="product col-md-5 service-image-left">
-                    
 						<center>
 							<% @post.post_attachments.all.each do |img| %>
 					        <%= image_tag(img.avatar_url) %>
@@ -28,9 +27,7 @@
 						</center>
 					</div>
 					
-					<div class="col-md-7">
-					
-          													 
+					<div class="col-md-7">				 
 					<div class="product-title"><%= @post.title %></div>
 					<div class="product-desc"><%= raw @post.description %></div>
 					<div class="product-rating"><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> </div>
@@ -51,7 +48,6 @@
 					<% else %>
 					 <div class="product-close">Closed</div>
 					<% end %>
-					
 					<hr>
 					<div class="col-md-7">
 					</div>
@@ -70,7 +66,6 @@
 								</div>
 							<% end %>
 						<% end %>
-					
 					</div>
 				</div>
 				</div>

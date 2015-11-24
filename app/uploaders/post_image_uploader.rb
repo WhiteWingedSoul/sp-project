@@ -17,7 +17,7 @@ class PostImageUploader < CarrierWave::Uploader::Base
   end
   
   version :thumb do
-    process resize_to_limit: [400, 250]
+    process resize_to_fill: [400, 250]
   end
   
 
