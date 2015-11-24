@@ -2,9 +2,21 @@
 <div class="container-fluid">
     <div class="content-wrapper">	
 		<div class="item-container">	
-		<div class="product-title"><%= gravatar_for @post.user, size: 50 %>
-          													 <%= link_to @post.user.name, @post.user %></div>
-          													 <hr>
+		<div class="col-md-10">	
+			<div class="product-title">
+				<%= gravatar_for @post.user, size: 50 %>
+			  <%= link_to @post.user.name, @post.user %>
+			</div>
+		</div>
+		<div class="col-md-2">	
+			<% if logged_in? && current_user != @user %> 
+				<br>
+      	<%=link_to 'Send message', new_conversation_path(:receiver_id => @post.user.id) , class:"btn btn-success" %> 
+      <% end %>
+		</div>
+		<div class="col-md-12">	
+			<hr>
+		</div>  
 			<div class="container">	
 				<div class="col-md-12">
 					<div class="product col-md-5 service-image-left">
@@ -77,19 +89,22 @@
 					</ul>
 				<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade in active" id="service-one">
-						 
-							<section class="container product-info">
-								
-								<strong>Các bài trả lời cho bài đăng:</strong>
 								<% @replies.each do |reply| %>
-									<div class="highlight" style="border-size:2px;border-style:solid;border-color:black">
-										<h2 style="margin:left"><%= reply.user.firstname + " " + reply.user.lastname %></h2>
-										<h3><%= reply.created_at %></h3>
-										<p><%= raw reply.content %></p>
+									<div class="highlight microposts">
+										<li id="reply-<%= reply.id %>">
+									    <%= link_to gravatar_for(reply.user, size: 50), reply.user %>
+										  <span class="user"><%= link_to reply.user.name, reply.user %></span>
+										  <span class="content"><%= raw reply.content %></span>
+										  <span class="timestamp">
+										    Posted <%= time_ago_in_words(reply.created_at) %> ago.
+										  </span>
+										</li>
 									</div>
 								<% end %>
 								
-								<% if logged_in? && current_user.id == @post.user_id && @post.post_status == true %>
+								
+								<% if logged_in?  && @post.post_status == true %>
+								<hr>
 									<%= form_for(@post, :html => { :multipart => true }) do |f| %>
 										<div class="field">
 											<p>Đăng lên trả lời của bạn</p>
@@ -105,20 +120,28 @@
 									<% end %>
 								<% end %>
 
-								
-							</section>
-										  
 						</div>
-					<div class="tab-pane fade" id="service-two">
-						
-						<section class="container">
-								
-						</section>
-						
-					</div>
-					<div class="tab-pane fade" id="service-three">
-												
-					</div>
+						<div class="tab-pane fade" id="service-two">
+							
+							<section class="container">
+									<br>
+									<div class="product-price"><strong>Tag:</strong>
+									    <% @current_tag_have.each do |tag| %>
+									    <%= tag.title %>
+									    <% end %>
+									</div>
+									<div class="product-price"><strong>Want:</strong>
+									    <% @current_tag_want.each do |tag| %>
+									    <%= tag.title %>
+									    <% end %>
+									</div>
+							</section>
+							
+						</div>
+						<div class="tab-pane fade" id="service-three">
+								<br>
+								<div class="product-desc"><%= raw @post.description %></div>
+						</div>
 				</div>
 				<hr>
 			</div>
