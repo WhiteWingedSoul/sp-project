@@ -8,10 +8,15 @@
   		<div class="col-sm-3"><!--left col-->
               
           <ul class="list-group">
-            <li class="list-group-item text-muted"><div class="text-center">
-          <%= gravatar_for @user %>
-          <h3><%= @user.name %></h3>
-        </div></li>
+            <li class="list-group-item text-muted">
+              <div class="text-center">
+                <%= gravatar_for @user %>
+                <h3><%= @user.name %></h3>
+                <% if logged_in? && current_user != @user %> 
+                  <%=link_to 'Send message', new_conversation_path(:receiver_id => @user.id) , class:"btn btn-success" %> 
+                <% end %>
+              </div>
+            </li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span><%= @user.created_at.strftime("%d-%b-%Y") %></li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Last seen</strong></span> Yesterday</li>
             
@@ -20,7 +25,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">Activity</div>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span><%= @user.posts.length %></li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Comments</strong></span> 78</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Comments</strong></span><%= @user.replies.length %></li>
           </div>
                
           <div class="panel panel-default">
@@ -37,7 +42,6 @@
           
           <ul class="nav nav-tabs" id="myTab">
             <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-            <% if current_user == @user %> <li><a href="#messages" data-toggle="tab">Messages</a></li> <% end %>
           </ul>
               
           <div class="tab-content">
@@ -108,24 +112,6 @@
                 </table>
               </div>
               
-             </div><!--/tab-pane-->
-             <div class="tab-pane" id="messages">
-               
-               <h2></h2>
-               
-               <ul class="list-group">
-                  <li class="list-group-item text-muted">Inbox</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Here is your a link to the latest summary report from the..</a> 2.13.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Hi Joe, There has been a request on your account since that was..</a> 2.11.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Nullam sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Thllam sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Wesm sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">For therepien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Also we, havesapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Swedish chef is assaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                  
-                </ul> 
-               
              </div><!--/tab-pane-->
             
           </div><!--/tab-content-->
