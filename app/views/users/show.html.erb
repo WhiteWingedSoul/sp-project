@@ -101,7 +101,11 @@
                     <% else %>
                       <% @paginated_posts.each do |post| %>
                         <tr>
-                          <td><i class="pull-right fa fa-edit"></i> <%= time_ago_in_words(post.created_at) %> ago - <%= @user.name %> posted "<%= post.title %>".</td>
+                          <td>
+                            <%= link_to(post) do %>
+                              <i class="pull-right fa fa-edit"></i> <%= time_ago_in_words(post.created_at) %> ago - <%= @user.name %> posted "<%= post.title %>".
+                            <% end %>
+                          </td>
                         </tr>
                       <% end %>
                     <% end %>
