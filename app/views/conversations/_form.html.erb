@@ -3,7 +3,7 @@
 <%= form_for :conversation, url: :conversations, html: { class: "" } do |f| %>
     <div class="form-group">
       <%= f.label :recipients %>
-      <%= f.select(:recipients, all_except_current, {}, { multiple: true , class: "chosen-select form-control",selected: params[:receiver_id] })%>
+      <%= f.select(:recipients, all_except_current, { selected: params[:receiver_id] }, { multiple: true , class: "chosen-select form-control" })%>
     </div>
     <div class="form-group">
       <%= f.label :subject %>
