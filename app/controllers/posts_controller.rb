@@ -93,10 +93,42 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    # abort params[:post].inspect
-    @post.replies.create!(:content => params[:post][:reply][:content], :user_id => current_user.id, :is_unread => true)
-    flash[:success] = "Đăng thành công bài trả lời"
-    redirect_to @post
+    if params[:post][:reply] != nil
+      @post.replies.create!(:content => params[:post][:reply][:content], :user_id => current_user.id, :is_unread => true)
+      flash[:success] = "Đăng thành công bài trả lời"
+      redirect_to @post
+    else
+      if @post.update(post_params)
+        post_id = @post.id
+
+        # 分解
+        wants = TagWant.where(post: post_id)
+        wants.each { |a| a.destroy }
+        haves = TagHave.where(post: post_id)
+        haves.each { |a| a.destroy  }
+        @post.post_attachments.each { |a| a.destroy }
+        
+        # 再構築
+        params[:post]['tag_have'].each do |tag|
+          if tag != ''
+            @tag_have = @post.tag_have.create(:tag => tag.to_i, :post => @post)
+          end
+        end
+
+        params[:post]['tag_want'].each do |tag|
+          if tag != ''
+            @tag_want = @post.tag_want.create(:tag => tag.to_i, :post => @post)
+          end
+        end
+
+        params[:post_attachments]['avatar'].each do |a|
+          @post_attachment = @post.post_attachments.create!(:avatar => a)
+        end
+        
+        flash[:success] = "Bài đăng đã được cập nhật"
+        redirect_to @post
+      end
+    end
   end
 
   # DELETE /posts/1
