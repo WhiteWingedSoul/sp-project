@@ -9,7 +9,7 @@
 			</div>
 		</div>
 		<div class="col-md-2">	
-			<% if logged_in? && current_user != @user %> 
+			<% if logged_in? && current_user != @post.user %> 
 				<br>
       	<%=link_to 'Send message', new_conversation_path(:receiver_id => @post.user.id) , class:"btn btn-success" %> 
       <% end %>
